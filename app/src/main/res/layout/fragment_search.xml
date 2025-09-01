@@ -36,7 +36,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_new_post"
+            android:text="@string/title_search"
             android:textSize="18sp"
             android:textColor="@color/black" />
 
@@ -59,38 +59,22 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Title">
+                android:hint="Search">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Content">
-                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="3"
-                    android:gravity="top" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPost"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvResults"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:insetLeft="0dp"
-                android:insetRight="0dp"
-                android:text="@string/btn_post"
-                android:textSize="18sp"
-                android:textAllCaps="true"
-                android:backgroundTint="@color/black" />
-
+                android:clipToPadding="false"
+                android:paddingTop="8dp" />
+            
         </LinearLayout>
     </ScrollView>
 

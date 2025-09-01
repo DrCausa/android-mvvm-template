@@ -16,6 +16,7 @@ import pe.drcausa.android_mvvm_template.R;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.HomeFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.MyProfileFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.NewPostFragment;
+import pe.drcausa.android_mvvm_template.ui.menu.fragments.SearchFragment;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -56,7 +57,10 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void handleSearch() {
-        Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new SearchFragment())
+                .commit();
     }
 
     private void handleNewPost() {
