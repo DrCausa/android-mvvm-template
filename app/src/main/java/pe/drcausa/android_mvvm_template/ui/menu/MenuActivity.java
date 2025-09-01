@@ -3,18 +3,20 @@ package pe.drcausa.android_mvvm_template.ui.menu;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.HomeFragment;
+import pe.drcausa.android_mvvm_template.ui.menu.fragments.ManageAccountFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.MyProfileFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.NewPostFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.SearchFragment;
@@ -48,16 +50,13 @@ public class MenuActivity extends AppCompatActivity {
             return insets;
         });
 
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+        getSupportFragmentManager().registerFragmentLifecycleCallbacks(new FragmentManager.FragmentLifecycleCallbacks() {
             @Override
-            public void handleOnBackPressed() {
-                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    getSupportFragmentManager().popBackStack();
-                } else {
-                    finish();
-                }
+            public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                super.onFragmentResumed(fm, f);
+                updateBottomIcons(f);
             }
-        });
+        }, true);
     }
 
     private void switchFragment(Fragment fragment) {
@@ -65,8 +64,6 @@ public class MenuActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
-
-        updateBottomIcons(fragment);
     }
 
     private void updateBottomIcons(Fragment fragment) {
@@ -78,7 +75,7 @@ public class MenuActivity extends AppCompatActivity {
             btnSearch.setIconResource(R.drawable.search);
         } else if (fragment instanceof NewPostFragment) {
             btnNewPost.setIconResource(R.drawable.add_notes_fill);
-        } else if (fragment instanceof MyProfileFragment) {
+        } else if (fragment instanceof MyProfileFragment || fragment instanceof ManageAccountFragment) {
             btnMyProfile.setIconResource(R.drawable.account_circle_fill);
         }
     }
