@@ -20,6 +20,8 @@ import pe.drcausa.android_mvvm_template.ui.menu.fragments.SearchFragment;
 
 public class MenuActivity extends AppCompatActivity {
 
+    private MaterialButton btnHome, btnSearch, btnNewPost, btnMyProfile;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +29,10 @@ public class MenuActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_menu);
 
-        MaterialButton btnHome = findViewById(R.id.btnHome);
-        MaterialButton btnSearch = findViewById(R.id.btnSearch);
-        MaterialButton btnNewPost = findViewById(R.id.btnNewPost);
-        MaterialButton btnMyProfile = findViewById(R.id.btnMyProfile);
+        btnHome = findViewById(R.id.btnHome);
+        btnSearch = findViewById(R.id.btnSearch);
+        btnNewPost = findViewById(R.id.btnNewPost);
+        btnMyProfile = findViewById(R.id.btnMyProfile);
 
         btnHome.setOnClickListener(v -> handleHome());
         btnSearch.setOnClickListener(v -> handleSearch());
