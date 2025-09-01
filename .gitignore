@@ -1,0 +1,40 @@
+# ==========================
+# Android Studio / IntelliJ
+# ==========================
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/runConfigurations/
+.idea/inspectionProfiles/
+
+# ==========================
+# Build outputs
+# ==========================
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+# ==========================
+# OS generated files
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Java / Kotlin
+# ==========================
+*.class
+*.jar
+*.log
+
+# ==========================
+# Keystore / Credentials
+# ==========================
+*.keystore
+.env
+*.properties
