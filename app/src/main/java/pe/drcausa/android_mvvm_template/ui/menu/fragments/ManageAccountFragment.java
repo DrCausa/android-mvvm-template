@@ -3,6 +3,7 @@ package pe.drcausa.android_mvvm_template.ui.menu.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,18 +37,22 @@ public class ManageAccountFragment extends Fragment {
         btnDeleteAccount.setOnClickListener(v -> handleDeleteAccount());
     }
 
-    private void handleReturn() {
+    private void switchFragment(Fragment fragment) {
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new MyProfileFragment())
+                .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
     }
 
+    private void handleReturn() { switchFragment(new MyProfileFragment()); }
+
     private void handleUpdateProfile() {
+        Toast.makeText(requireContext(), "Update Profile", Toast.LENGTH_SHORT).show();
     }
 
     private void handleUpdatePassword() {
+        Toast.makeText(requireContext(), "Update Password", Toast.LENGTH_SHORT).show();
     }
 
     private void handleLogout() {
@@ -56,5 +61,6 @@ public class ManageAccountFragment extends Fragment {
     }
 
     private void handleDeleteAccount() {
+        Toast.makeText(requireContext(), "Delete Account", Toast.LENGTH_SHORT).show();
     }
 }

@@ -39,9 +39,7 @@ public class PrefsFragment extends Fragment {
                 .commit();
     }
 
-    private void handleReturn() {
-        switchFragment(new HomeFragment());
-    }
+    private void handleReturn() { switchFragment(new HomeFragment()); }
 
     private void handleUpdateLanguage() {
         Toast.makeText(requireContext(), "Update Language", Toast.LENGTH_SHORT).show();

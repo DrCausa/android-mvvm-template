@@ -35,7 +35,5 @@ public class HomeFragment extends Fragment {
                 .commit();
     }
 
-    private void handlePrefs() {
-        switchFragment(new PrefsFragment());
-    }
+    private void handlePrefs() { switchFragment(new PrefsFragment()); }
 }

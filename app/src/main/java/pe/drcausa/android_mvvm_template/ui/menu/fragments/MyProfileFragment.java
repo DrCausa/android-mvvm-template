@@ -29,18 +29,15 @@ public class MyProfileFragment extends Fragment {
         btnManageAccount.setOnClickListener(v -> handleManageAccount());
     }
 
-    private void handleReturn() {
+    private void switchFragment(Fragment fragment) {
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment())
+                .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
     }
 
-    private void handleManageAccount() {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new ManageAccountFragment())
-                .commit();
-    }
+    private void handleReturn() { switchFragment(new HomeFragment()); }
+
+    private void handleManageAccount() { switchFragment(new ManageAccountFragment()); }
 }

@@ -29,13 +29,15 @@ public class NewPostFragment extends Fragment {
         btnPost.setOnClickListener(v -> handlePost());
     }
 
-    private void handleReturn() {
+    private void switchFragment(Fragment fragment) {
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment())
+                .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
     }
+
+    private void handleReturn() { switchFragment(new HomeFragment()); }
 
     private void handlePost() {
         Toast.makeText(requireContext(), "Post", Toast.LENGTH_SHORT).show();

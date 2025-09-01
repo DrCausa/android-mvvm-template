@@ -26,11 +26,13 @@ public class SearchFragment extends Fragment {
         btnReturn.setOnClickListener(v -> handleReturn());
     }
 
-    private void handleReturn() {
+    private void switchFragment(Fragment fragment) {
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment())
+                .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
     }
+
+    private void handleReturn() { switchFragment(new HomeFragment()); }
 }
