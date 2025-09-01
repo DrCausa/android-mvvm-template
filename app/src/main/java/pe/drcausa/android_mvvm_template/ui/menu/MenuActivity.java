@@ -14,6 +14,7 @@ import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.HomeFragment;
+import pe.drcausa.android_mvvm_template.ui.menu.fragments.MyProfileFragment;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -27,12 +28,12 @@ public class MenuActivity extends AppCompatActivity {
         MaterialButton btnHome = findViewById(R.id.btnHome);
         MaterialButton btnSearch = findViewById(R.id.btnSearch);
         MaterialButton btnNewPost = findViewById(R.id.btnNewPost);
-        MaterialButton btnMyAccount = findViewById(R.id.btnMyAccount);
+        MaterialButton btnMyProfile = findViewById(R.id.btnMyProfile);
 
         btnHome.setOnClickListener(v -> handleHome());
         btnSearch.setOnClickListener(v -> handleSearch());
         btnNewPost.setOnClickListener(v -> handleNewPost());
-        btnMyAccount.setOnClickListener(v -> handleMyAccount());
+        btnMyProfile.setOnClickListener(v -> handleMyProfile());
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -47,7 +48,10 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void handleHome() {
-        Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new HomeFragment())
+                .commit();
     }
 
     private void handleSearch() {
@@ -58,7 +62,10 @@ public class MenuActivity extends AppCompatActivity {
         Toast.makeText(this, "New Post", Toast.LENGTH_SHORT).show();
     }
 
-    private void handleMyAccount() {
-        Toast.makeText(this, "My Account", Toast.LENGTH_SHORT).show();
+    private void handleMyProfile() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new MyProfileFragment())
+                .commit();
     }
 }

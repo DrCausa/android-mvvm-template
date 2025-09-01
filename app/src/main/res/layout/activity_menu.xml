@@ -67,7 +67,7 @@
                 app:cornerRadius="0dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnMyAccount"
+                android:id="@+id/btnMyProfile"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_weight="1"
