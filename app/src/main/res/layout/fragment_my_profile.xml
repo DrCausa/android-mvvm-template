@@ -26,6 +26,11 @@
             android:insetLeft="0dp"
             android:insetRight="0dp"
             android:backgroundTint="@android:color/transparent"
+            app:icon="@drawable/arrow_back_ios_new"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="@color/black"
+            app:iconSize="48dp"
             app:cornerRadius="0dp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -45,6 +50,11 @@
             android:insetLeft="0dp"
             android:insetRight="0dp"
             android:backgroundTint="@android:color/transparent"
+            app:icon="@drawable/manage_accounts"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="@color/black"
+            app:iconSize="48dp"
             app:cornerRadius="0dp" />
 
     </com.google.android.material.appbar.MaterialToolbar>

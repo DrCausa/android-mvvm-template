@@ -13,28 +13,34 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
-        app:layout_constraintTop_toTopOf="@+id/main">
+        app:layout_constraintTop_toTopOf="@+id/main"
+        tools:layout_editor_absoluteX="0dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="android-mvvm-template"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textAllCaps="true" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPrefs"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="end"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
             android:backgroundTint="@android:color/transparent"
-            app:cornerRadius="0dp" />
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="0dp"
+            app:icon="@drawable/settings_night_sight"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="48dp"
+            app:iconTint="@color/black" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 

@@ -40,6 +40,11 @@
                 android:insetLeft="0dp"
                 android:insetRight="0dp"
                 android:backgroundTint="@android:color/transparent"
+                app:icon="@drawable/home"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconTint="@color/black"
+                app:iconSize="48dp"
                 app:cornerRadius="0dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -52,6 +57,11 @@
                 android:insetLeft="0dp"
                 android:insetRight="0dp"
                 android:backgroundTint="@android:color/transparent"
+                app:icon="@drawable/search"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconTint="@color/black"
+                app:iconSize="48dp"
                 app:cornerRadius="0dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -64,6 +74,11 @@
                 android:insetLeft="0dp"
                 android:insetRight="0dp"
                 android:backgroundTint="@android:color/transparent"
+                app:icon="@drawable/add_notes"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconTint="@color/black"
+                app:iconSize="48dp"
                 app:cornerRadius="0dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -76,6 +91,11 @@
                 android:insetLeft="0dp"
                 android:insetRight="0dp"
                 android:backgroundTint="@android:color/transparent"
+                app:icon="@drawable/account_circle"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconTint="@color/black"
+                app:iconSize="48dp"
                 app:cornerRadius="0dp" />
 
         </LinearLayout>
