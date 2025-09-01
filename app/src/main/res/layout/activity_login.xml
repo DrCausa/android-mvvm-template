@@ -26,7 +26,8 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:src="@drawable/ic_launcher_foreground"
+                android:contentDescription="@string/app_logo_description" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:hint="Nombre de Usuario">
+                android:hint="@string/edt_username">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtUsername"
                     android:layout_width="match_parent"
@@ -54,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Contraseña">
+                android:hint="@string/edt_password">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtPassword"
                     android:layout_width="match_parent"
@@ -70,7 +71,7 @@
                 android:insetBottom="0dp"
                 android:insetLeft="0dp"
                 android:insetRight="0dp"
-                android:text="Login"
+                android:text="@string/btn_login"
                 android:textSize="18sp"
                 android:textAllCaps="true"
                 android:backgroundTint="@color/black" />
@@ -80,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="¿No tienes una cuenta? Registrate aquí"
+                android:text="@string/txt_register"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:gravity="center" />
