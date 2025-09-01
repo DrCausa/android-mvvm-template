@@ -27,7 +27,15 @@ public class HomeFragment extends Fragment {
         btnPrefs.setOnClickListener(v -> handlePrefs());
     }
 
+    private void switchFragment(Fragment fragment) {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     private void handlePrefs() {
-        Toast.makeText(requireContext(), "Prefs", Toast.LENGTH_SHORT).show();
+        switchFragment(new PrefsFragment());
     }
 }

@@ -19,6 +19,7 @@ import pe.drcausa.android_mvvm_template.ui.menu.fragments.HomeFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.ManageAccountFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.MyProfileFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.NewPostFragment;
+import pe.drcausa.android_mvvm_template.ui.menu.fragments.PrefsFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.SearchFragment;
 
 public class MenuActivity extends AppCompatActivity {
@@ -69,7 +70,7 @@ public class MenuActivity extends AppCompatActivity {
     private void updateBottomIcons(Fragment fragment) {
         inactivateBottomIcons();
 
-        if (fragment instanceof HomeFragment) {
+        if (fragment instanceof HomeFragment || fragment instanceof PrefsFragment) {
             btnHome.setIconResource(R.drawable.home_fill);
         } else if (fragment instanceof SearchFragment) {
             btnSearch.setIconResource(R.drawable.search);
