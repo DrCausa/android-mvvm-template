@@ -15,6 +15,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 import pe.drcausa.android_mvvm_template.R;
 import pe.drcausa.android_mvvm_template.ui.menu.MenuActivity;
+import pe.drcausa.android_mvvm_template.ui.register.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -44,5 +45,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void handleRegister() {
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 }
