@@ -13,10 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
+import pe.drcausa.android_mvvm_template.ui.menu.fragments.HomeFragment;
 
 public class MenuActivity extends AppCompatActivity {
-
-    private MaterialButton btnPrefs, btnHome, btnSearch, btnNewPost, btnMyAccount;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,17 +24,20 @@ public class MenuActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_menu);
 
-        btnPrefs = findViewById(R.id.btnPrefs);
-        btnHome = findViewById(R.id.btnHome);
-        btnSearch = findViewById(R.id.btnSearch);
-        btnNewPost = findViewById(R.id.btnNewPost);
-        btnMyAccount = findViewById(R.id.btnMyAccount);
+        MaterialButton btnHome = findViewById(R.id.btnHome);
+        MaterialButton btnSearch = findViewById(R.id.btnSearch);
+        MaterialButton btnNewPost = findViewById(R.id.btnNewPost);
+        MaterialButton btnMyAccount = findViewById(R.id.btnMyAccount);
 
-        btnPrefs.setOnClickListener(v -> handlePrefs());
         btnHome.setOnClickListener(v -> handleHome());
         btnSearch.setOnClickListener(v -> handleSearch());
         btnNewPost.setOnClickListener(v -> handleNewPost());
         btnMyAccount.setOnClickListener(v -> handleMyAccount());
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new HomeFragment())
+                .commit();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -58,9 +60,5 @@ public class MenuActivity extends AppCompatActivity {
 
     private void handleMyAccount() {
         Toast.makeText(this, "My Account", Toast.LENGTH_SHORT).show();
-    }
-
-    private void handlePrefs() {
-        Toast.makeText(this, "Prefs", Toast.LENGTH_SHORT).show();
     }
 }
