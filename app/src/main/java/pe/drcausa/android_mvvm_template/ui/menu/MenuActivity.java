@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButton;
 import pe.drcausa.android_mvvm_template.R;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.HomeFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.MyProfileFragment;
+import pe.drcausa.android_mvvm_template.ui.menu.fragments.NewPostFragment;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -59,7 +60,10 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void handleNewPost() {
-        Toast.makeText(this, "New Post", Toast.LENGTH_SHORT).show();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new NewPostFragment())
+                .commit();
     }
 
     private void handleMyProfile() {

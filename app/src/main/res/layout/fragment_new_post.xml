@@ -36,26 +36,9 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_my_profile"
+            android:text="@string/title_new_post"
             android:textSize="18sp"
             android:textColor="@color/black" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnManageAccount"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="end"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
-            android:backgroundTint="@android:color/transparent"
-            app:icon="@drawable/manage_accounts"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconTint="@color/black"
-            app:iconSize="48dp"
-            app:cornerRadius="0dp" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -72,41 +55,40 @@
             android:orientation="vertical"
             android:padding="32dp">
 
-            <ImageView
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_gravity="top|center_horizontal"
-                android:src="@drawable/ic_launcher_foreground" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Title">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
+                android:hint="Content">
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="{names + lastnames}"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:gravity="center" />
+                    android:lines="3"
+                    android:gravity="top" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="{username}"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:gravity="center" />
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvUserPosts"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp" />
+                android:layout_marginTop="32dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:text="@string/btn_post"
+                android:textSize="18sp"
+                android:textAllCaps="true"
+                android:backgroundTint="@color/black" />
 
         </LinearLayout>
     </ScrollView>
