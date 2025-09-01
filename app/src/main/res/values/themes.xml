@@ -5,5 +5,5 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Androidmvvmtemplate" parent="Base.Theme.Androidmvvmtemplate" />
+    <style name="Theme.AndroidMVVMTemplate" parent="Base.Theme.Androidmvvmtemplate" />
 </resources>
