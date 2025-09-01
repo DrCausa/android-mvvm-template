@@ -36,7 +36,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_my_profile"
+            android:text="@string/txt_my_profile_title"
             android:textSize="18sp"
             android:textColor="@color/black" />
 

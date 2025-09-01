@@ -1,12 +1,26 @@
 <resources>
     <string name="app_name">android-mvvm-template</string>
-    <string name="title_my_profile">My Profile</string>
-    <string name="title_new_post">New Post</string>
+    <string name="app_logo_description">App Logo</string>
     <string name="btn_post">Post</string>
-    <string name="title_search">Search</string>
+    <string name="btn_login">Login</string>
     <string name="edt_username">Username</string>
     <string name="edt_password">Password</string>
-    <string name="btn_login">Login</string>
+    <string name="txt_new_post_title">New Post</string>
+    <string name="txt_my_profile_title">My Profile</string>
+    <string name="txt_search_title">Search</string>
     <string name="txt_register">Don\'t have an account? Sign up here</string>
-    <string name="app_logo_description">App Logo</string>
+    <string name="txt_manage_account_title">Manage Account</string>
+    <string name="txt_update_profile_description">Update your account\'s profile information and email adress.</string>
+    <string name="txt_update_profile_subtitle">Update Profile</string>
+    <string name="edt_email">Email</string>
+    <string name="edt_names">Names</string>
+    <string name="edt_lastnames">Lastnames</string>
+    <string name="btn_save_changes">Save changes</string>
+    <string name="txt_update_password_subtitle">Update Password</string>
+    <string name="txt_update_password_description">Ensure your account is using a long, random password to stay secure.</string>
+    <string name="edt_current_password">Current password</string>
+    <string name="edt_new_password">New password</string>
+    <string name="edt_confirm_new_password">Confirm new password</string>
+    <string name="btn_logout">Logout</string>
+    <string name="btn_delete_account">Delete account</string>
 </resources>

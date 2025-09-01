@@ -38,6 +38,9 @@ public class MyProfileFragment extends Fragment {
     }
 
     private void handleManageAccount() {
-        Toast.makeText(requireContext(), "Manage Account", Toast.LENGTH_SHORT).show();
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new ManageAccountFragment())
+                .commit();
     }
 }
