@@ -1,14 +1,15 @@
 package pe.drcausa.android_mvvm_template.ui.menu;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -34,48 +35,58 @@ public class MenuActivity extends AppCompatActivity {
         btnNewPost = findViewById(R.id.btnNewPost);
         btnMyProfile = findViewById(R.id.btnMyProfile);
 
-        btnHome.setOnClickListener(v -> handleHome());
-        btnSearch.setOnClickListener(v -> handleSearch());
-        btnNewPost.setOnClickListener(v -> handleNewPost());
-        btnMyProfile.setOnClickListener(v -> handleMyProfile());
+        btnHome.setOnClickListener(v -> switchFragment(new HomeFragment()));
+        btnSearch.setOnClickListener(v -> switchFragment(new SearchFragment()));
+        btnNewPost.setOnClickListener(v -> switchFragment(new NewPostFragment()));
+        btnMyProfile.setOnClickListener(v -> switchFragment(new MyProfileFragment()));
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment())
-                .commit();
+        switchFragment(new HomeFragment());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    finish();
+                }
+            }
+        });
     }
 
-    private void handleHome() {
+    private void switchFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment())
+                .replace(R.id.fragment_container, fragment)
                 .commit();
+
+        updateBottomIcons(fragment);
     }
 
-    private void handleSearch() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new SearchFragment())
-                .commit();
+    private void updateBottomIcons(Fragment fragment) {
+        inactivateBottomIcons();
+
+        if (fragment instanceof HomeFragment) {
+            btnHome.setIconResource(R.drawable.home_fill);
+        } else if (fragment instanceof SearchFragment) {
+            btnSearch.setIconResource(R.drawable.search);
+        } else if (fragment instanceof NewPostFragment) {
+            btnNewPost.setIconResource(R.drawable.add_notes_fill);
+        } else if (fragment instanceof MyProfileFragment) {
+            btnMyProfile.setIconResource(R.drawable.account_circle_fill);
+        }
     }
 
-    private void handleNewPost() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new NewPostFragment())
-                .commit();
-    }
-
-    private void handleMyProfile() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new MyProfileFragment())
-                .commit();
+    private void inactivateBottomIcons() {
+        btnHome.setIconResource(R.drawable.home);
+        btnSearch.setIconResource(R.drawable.search);
+        btnNewPost.setIconResource(R.drawable.add_notes);
+        btnMyProfile.setIconResource(R.drawable.account_circle);
     }
 }
