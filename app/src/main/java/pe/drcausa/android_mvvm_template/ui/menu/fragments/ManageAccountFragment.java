@@ -41,7 +41,7 @@ public class ManageAccountFragment extends Fragment {
         btnDeleteAccount.setOnClickListener(v -> handleBtnDeleteAccount());
     }
 
-    private void handleBtnReturn() { parentActivity.switchFragment(new MyProfileFragment(parentActivity)); }
+    private void handleBtnReturn() { parentActivity.getOnBackPressedDispatcher().onBackPressed(); }
 
     private void handleBtnUpdateProfile() {
         Toast.makeText(requireContext(), "Update Profile", Toast.LENGTH_SHORT).show();

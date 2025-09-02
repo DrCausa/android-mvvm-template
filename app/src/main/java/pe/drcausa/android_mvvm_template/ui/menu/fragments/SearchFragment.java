@@ -30,5 +30,5 @@ public class SearchFragment extends Fragment {
         btnReturn.setOnClickListener(v -> handleBtnReturn());
     }
 
-    private void handleBtnReturn() { parentActivity.switchFragment(new HomeFragment(parentActivity)); }
+    private void handleBtnReturn() { parentActivity.getOnBackPressedDispatcher().onBackPressed(); }
 }

@@ -35,7 +35,7 @@ public class PrefsFragment extends Fragment {
         btnUpdateTheme.setOnClickListener(v -> handleBtnUpdateTheme());
     }
 
-    private void handleBtnReturn() { parentActivity.switchFragment(new HomeFragment(parentActivity)); }
+    private void handleBtnReturn() { parentActivity.getOnBackPressedDispatcher().onBackPressed(); }
 
     private void handleBtnUpdateLanguage() {
         Toast.makeText(requireContext(), "Update Language", Toast.LENGTH_SHORT).show();

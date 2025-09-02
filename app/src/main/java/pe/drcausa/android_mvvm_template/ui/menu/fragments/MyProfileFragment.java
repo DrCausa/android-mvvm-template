@@ -32,7 +32,7 @@ public class MyProfileFragment extends Fragment {
         btnManageAccount.setOnClickListener(v -> handleBtnManageAccount());
     }
 
-    private void handleBtnReturn() { parentActivity.switchFragment(new HomeFragment(parentActivity)); }
+    private void handleBtnReturn() { parentActivity.getOnBackPressedDispatcher().onBackPressed(); }
 
     private void handleBtnManageAccount() { parentActivity.switchFragment(new ManageAccountFragment(parentActivity)); }
 }

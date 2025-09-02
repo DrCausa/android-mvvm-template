@@ -33,7 +33,7 @@ public class NewPostFragment extends Fragment {
         btnCreatePost.setOnClickListener(v -> handleBtnCreatePost());
     }
 
-    private void handleBtnReturn() { parentActivity.switchFragment(new HomeFragment(parentActivity)); }
+    private void handleBtnReturn() { parentActivity.getOnBackPressedDispatcher().onBackPressed(); }
 
     private void handleBtnCreatePost() {
         Toast.makeText(requireContext(), "Create Post", Toast.LENGTH_SHORT).show();
