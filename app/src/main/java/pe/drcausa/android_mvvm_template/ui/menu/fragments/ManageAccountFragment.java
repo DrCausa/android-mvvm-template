@@ -13,11 +13,15 @@ import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
 import pe.drcausa.android_mvvm_template.ui.login.LoginActivity;
+import pe.drcausa.android_mvvm_template.ui.menu.MenuActivity;
 
 public class ManageAccountFragment extends Fragment {
 
-    public ManageAccountFragment() {
+    private final MenuActivity parentActivity;
+
+    public ManageAccountFragment(MenuActivity parentActivity) {
         super(R.layout.fragment_manage_account);
+        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -30,37 +34,30 @@ public class ManageAccountFragment extends Fragment {
         MaterialButton btnLogout = view.findViewById(R.id.btnLogout);
         MaterialButton btnDeleteAccount = view.findViewById(R.id.btnDeleteAccount);
 
-        btnReturn.setOnClickListener(v -> handleReturn());
-        btnUpdateProfile.setOnClickListener(v -> handleUpdateProfile());
-        btnUpdatePassword.setOnClickListener(v -> handleUpdatePassword());
-        btnLogout.setOnClickListener(v -> handleLogout());
-        btnDeleteAccount.setOnClickListener(v -> handleDeleteAccount());
+        btnReturn.setOnClickListener(v -> handleBtnReturn());
+        btnUpdateProfile.setOnClickListener(v -> handleBtnUpdateProfile());
+        btnUpdatePassword.setOnClickListener(v -> handleBtnUpdatePassword());
+        btnLogout.setOnClickListener(v -> handleBtnLogout());
+        btnDeleteAccount.setOnClickListener(v -> handleBtnDeleteAccount());
     }
 
-    private void switchFragment(Fragment fragment) {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
+    private void handleBtnReturn() { parentActivity.switchFragment(new MyProfileFragment(parentActivity)); }
 
-    private void handleReturn() { switchFragment(new MyProfileFragment()); }
-
-    private void handleUpdateProfile() {
+    private void handleBtnUpdateProfile() {
         Toast.makeText(requireContext(), "Update Profile", Toast.LENGTH_SHORT).show();
     }
 
-    private void handleUpdatePassword() {
+    private void handleBtnUpdatePassword() {
         Toast.makeText(requireContext(), "Update Password", Toast.LENGTH_SHORT).show();
     }
 
-    private void handleLogout() {
-        requireActivity().startActivity(new Intent(requireContext(), LoginActivity.class));
-        requireActivity().finish();
+    private void handleBtnLogout() {
+        Intent intent = new Intent(requireContext(), LoginActivity.class);
+        startActivity(intent);
+        parentActivity.finish();
     }
 
-    private void handleDeleteAccount() {
+    private void handleBtnDeleteAccount() {
         Toast.makeText(requireContext(), "Delete Account", Toast.LENGTH_SHORT).show();
     }
 }

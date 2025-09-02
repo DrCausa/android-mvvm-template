@@ -38,12 +38,12 @@ public class MenuActivity extends AppCompatActivity {
         btnNewPost = findViewById(R.id.btnNewPost);
         btnMyProfile = findViewById(R.id.btnMyProfile);
 
-        btnHome.setOnClickListener(v -> switchFragment(new HomeFragment()));
-        btnSearch.setOnClickListener(v -> switchFragment(new SearchFragment()));
-        btnNewPost.setOnClickListener(v -> switchFragment(new NewPostFragment()));
-        btnMyProfile.setOnClickListener(v -> switchFragment(new MyProfileFragment()));
+        btnHome.setOnClickListener(v -> handleBtnHome());
+        btnSearch.setOnClickListener(v -> handleBtnSearch());
+        btnNewPost.setOnClickListener(v -> handleBtnNewPost());
+        btnMyProfile.setOnClickListener(v -> handleBtnMyProfile());
 
-        switchFragment(new HomeFragment());
+        switchFragment(new HomeFragment(this));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -60,10 +60,27 @@ public class MenuActivity extends AppCompatActivity {
         }, true);
     }
 
-    private void switchFragment(Fragment fragment) {
+    private void handleBtnHome() {
+        switchFragment(new HomeFragment(this));
+    }
+
+    private void handleBtnSearch() {
+        switchFragment(new SearchFragment(this));
+    }
+
+    private void handleBtnNewPost() {
+        switchFragment(new NewPostFragment(this));
+    }
+
+    private void handleBtnMyProfile() {
+        switchFragment(new MyProfileFragment(this));
+    }
+
+    public void switchFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 

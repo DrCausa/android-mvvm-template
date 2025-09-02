@@ -11,11 +11,15 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
+import pe.drcausa.android_mvvm_template.ui.menu.MenuActivity;
 
 public class NewPostFragment extends Fragment {
 
-    public NewPostFragment() {
+    private final MenuActivity parentActivity;
+
+    public NewPostFragment(MenuActivity parentActivity) {
         super(R.layout.fragment_new_post);
+        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -23,23 +27,15 @@ public class NewPostFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         MaterialButton btnReturn = view.findViewById(R.id.btnReturn);
-        MaterialButton btnPost = view.findViewById(R.id.btnPost);
+        MaterialButton btnCreatePost = view.findViewById(R.id.btnCreatePost);
 
-        btnReturn.setOnClickListener(v -> handleReturn());
-        btnPost.setOnClickListener(v -> handlePost());
+        btnReturn.setOnClickListener(v -> handleBtnReturn());
+        btnCreatePost.setOnClickListener(v -> handleBtnCreatePost());
     }
 
-    private void switchFragment(Fragment fragment) {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
+    private void handleBtnReturn() { parentActivity.switchFragment(new HomeFragment(parentActivity)); }
 
-    private void handleReturn() { switchFragment(new HomeFragment()); }
-
-    private void handlePost() {
-        Toast.makeText(requireContext(), "Post", Toast.LENGTH_SHORT).show();
+    private void handleBtnCreatePost() {
+        Toast.makeText(requireContext(), "Create Post", Toast.LENGTH_SHORT).show();
     }
 }

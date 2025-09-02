@@ -10,11 +10,15 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
+import pe.drcausa.android_mvvm_template.ui.menu.MenuActivity;
 
 public class SearchFragment extends Fragment {
 
-    public SearchFragment() {
+    private final MenuActivity parentActivity;
+
+    public SearchFragment(MenuActivity parentActivity) {
         super(R.layout.fragment_search);
+        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -23,16 +27,8 @@ public class SearchFragment extends Fragment {
 
         MaterialButton btnReturn = view.findViewById(R.id.btnReturn);
 
-        btnReturn.setOnClickListener(v -> handleReturn());
+        btnReturn.setOnClickListener(v -> handleBtnReturn());
     }
 
-    private void switchFragment(Fragment fragment) {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
-
-    private void handleReturn() { switchFragment(new HomeFragment()); }
+    private void handleBtnReturn() { parentActivity.switchFragment(new HomeFragment(parentActivity)); }
 }

@@ -26,6 +26,6 @@
     <string name="btn_save_changes">Save changes</string>
     <string name="btn_logout">Logout</string>
     <string name="btn_delete_account">Delete account</string>
-    <string name="btn_post">Post</string>
+    <string name="btn_create_post">Create post</string>
     <string name="btn_login">Login</string>
 </resources>

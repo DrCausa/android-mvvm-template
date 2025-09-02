@@ -11,11 +11,15 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
+import pe.drcausa.android_mvvm_template.ui.menu.MenuActivity;
 
 public class PrefsFragment extends Fragment {
 
-    public PrefsFragment() {
+    private final MenuActivity parentActivity;
+
+    public PrefsFragment(MenuActivity parentActivity) {
         super(R.layout.fragment_prefs);
+        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -26,26 +30,18 @@ public class PrefsFragment extends Fragment {
         MaterialButton btnUpdateLanguage = view.findViewById(R.id.btnUpdateLanguage);
         MaterialButton btnUpdateTheme = view.findViewById(R.id.btnUpdateTheme);
 
-        btnReturn.setOnClickListener(v -> handleReturn());
-        btnUpdateLanguage.setOnClickListener(v -> handleUpdateLanguage());
-        btnUpdateTheme.setOnClickListener(v -> handleUpdateTheme());
+        btnReturn.setOnClickListener(v -> handleBtnReturn());
+        btnUpdateLanguage.setOnClickListener(v -> handleBtnUpdateLanguage());
+        btnUpdateTheme.setOnClickListener(v -> handleBtnUpdateTheme());
     }
 
-    private void switchFragment(Fragment fragment) {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
+    private void handleBtnReturn() { parentActivity.switchFragment(new HomeFragment(parentActivity)); }
 
-    private void handleReturn() { switchFragment(new HomeFragment()); }
-
-    private void handleUpdateLanguage() {
+    private void handleBtnUpdateLanguage() {
         Toast.makeText(requireContext(), "Update Language", Toast.LENGTH_SHORT).show();
     }
 
-    private void handleUpdateTheme() {
+    private void handleBtnUpdateTheme() {
         Toast.makeText(requireContext(), "Update Theme", Toast.LENGTH_SHORT).show();
     }
 }
