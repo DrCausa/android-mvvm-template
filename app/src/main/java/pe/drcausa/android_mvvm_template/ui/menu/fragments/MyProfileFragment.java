@@ -35,7 +35,7 @@ public class MyProfileFragment extends Fragment {
     private void handleBtnManageAccount() {
         ActivityUtils.switchFragment(
                 (AppCompatActivity) requireActivity(),
-                new PrefsFragment()
+                new ManageAccountFragment()
         );
     }
 }

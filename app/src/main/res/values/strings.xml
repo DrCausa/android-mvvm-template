@@ -5,6 +5,8 @@
     <string name="txt_my_profile_title">My Profile</string>
     <string name="txt_search_title">Search</string>
     <string name="txt_register">Don\'t have an account? Sign up here</string>
+    <string name="txt_login">Already have an account? Login here</string>
+    <string name="txt_restore_password">Forgot your password?</string>
     <string name="txt_manage_account_title">Manage Account</string>
     <string name="txt_update_profile_subtitle">Update Profile</string>
     <string name="txt_update_password_subtitle">Update Password</string>
@@ -28,4 +30,6 @@
     <string name="btn_delete_account">Delete account</string>
     <string name="btn_create_post">Create post</string>
     <string name="btn_login">Login</string>
+    <string name="edt_confirm_password">Confirm password</string>
+    <string name="btn_register">Register</string>
 </resources>
