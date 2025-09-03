@@ -36,26 +36,9 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_my_profile_title"
+            android:text="@string/txt_prefs_title"
             android:textSize="18sp"
             android:textColor="@color/black" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnManageAccount"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="end"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
-            android:backgroundTint="@android:color/transparent"
-            app:icon="@drawable/manage_accounts"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconTint="@color/black"
-            app:iconSize="48dp"
-            app:cornerRadius="0dp" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -73,41 +56,64 @@
             android:orientation="vertical"
             android:padding="32dp">
 
-            <ImageView
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_gravity="top|center_horizontal"
-                android:src="@drawable/ic_launcher_foreground" />
-
-            <LinearLayout
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical">
+                android:text="@string/txt_language_subtitle"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="{names + lastnames}"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:gravity="center" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="{username}"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:gravity="center" />
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvUserPosts"
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp" />
+                android:text="@string/txt_language_description"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpdateLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:text="@string/btn_save_changes"
+                android:textSize="18sp"
+                android:textAllCaps="true"
+                android:backgroundTint="@color/black" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:text="@string/txt_theme_subtitle"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_theme_description"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpdateTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:text="@string/btn_save_changes"
+                android:textSize="18sp"
+                android:textAllCaps="true"
+                android:backgroundTint="@color/black" />
 
         </LinearLayout>
     </ScrollView>

@@ -23,14 +23,8 @@ public class SearchFragment extends Fragment {
 
         MaterialButton btnReturn = view.findViewById(R.id.btnReturn);
 
-        btnReturn.setOnClickListener(v -> handleReturn());
+        btnReturn.setOnClickListener(v -> handleBtnReturn());
     }
 
-    private void handleReturn() {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment())
-                .addToBackStack(null)
-                .commit();
-    }
+    private void handleBtnReturn() { requireActivity().getOnBackPressedDispatcher().onBackPressed(); }
 }

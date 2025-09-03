@@ -23,21 +23,15 @@ public class NewPostFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         MaterialButton btnReturn = view.findViewById(R.id.btnReturn);
-        MaterialButton btnPost = view.findViewById(R.id.btnPost);
+        MaterialButton btnCreatePost = view.findViewById(R.id.btnCreatePost);
 
-        btnReturn.setOnClickListener(v -> handleReturn());
-        btnPost.setOnClickListener(v -> handlePost());
+        btnReturn.setOnClickListener(v -> handleBtnReturn());
+        btnCreatePost.setOnClickListener(v -> handleBtnCreatePost());
     }
 
-    private void handleReturn() {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment())
-                .addToBackStack(null)
-                .commit();
-    }
+    private void handleBtnReturn() { requireActivity().getOnBackPressedDispatcher().onBackPressed(); }
 
-    private void handlePost() {
-        Toast.makeText(requireContext(), "Post", Toast.LENGTH_SHORT).show();
+    private void handleBtnCreatePost() {
+        Toast.makeText(requireContext(), "Create Post", Toast.LENGTH_SHORT).show();
     }
 }
