@@ -1,5 +1,6 @@
 package pe.drcausa.android_mvvm_template.ui.menu.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
+import pe.drcausa.android_mvvm_template.ui.auth.AuthActivity;
 
 public class ManageAccountFragment extends Fragment {
 
@@ -46,6 +48,8 @@ public class ManageAccountFragment extends Fragment {
     }
 
     private void handleBtnLogout() {
+        Intent intent = new Intent(requireContext(), AuthActivity.class);
+        startActivity(intent);
         requireActivity().finish();
     }
 
