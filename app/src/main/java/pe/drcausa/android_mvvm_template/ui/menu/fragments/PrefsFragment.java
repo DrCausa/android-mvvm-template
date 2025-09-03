@@ -11,15 +11,11 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
-import pe.drcausa.android_mvvm_template.ui.menu.MenuActivity;
 
 public class PrefsFragment extends Fragment {
 
-    private final MenuActivity parentActivity;
-
-    public PrefsFragment(MenuActivity parentActivity) {
+    public PrefsFragment() {
         super(R.layout.fragment_prefs);
-        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -35,7 +31,7 @@ public class PrefsFragment extends Fragment {
         btnUpdateTheme.setOnClickListener(v -> handleBtnUpdateTheme());
     }
 
-    private void handleBtnReturn() { parentActivity.getOnBackPressedDispatcher().onBackPressed(); }
+    private void handleBtnReturn() { requireActivity().getOnBackPressedDispatcher().onBackPressed(); }
 
     private void handleBtnUpdateLanguage() {
         Toast.makeText(requireContext(), "Update Language", Toast.LENGTH_SHORT).show();

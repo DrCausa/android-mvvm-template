@@ -5,20 +5,18 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
-import pe.drcausa.android_mvvm_template.ui.menu.MenuActivity;
+import pe.drcausa.android_mvvm_template.utils.ActivityUtils;
 
 public class MyProfileFragment extends Fragment {
 
-    private final MenuActivity parentActivity;
-
-    public MyProfileFragment(MenuActivity parentActivity) {
+    public MyProfileFragment() {
         super(R.layout.fragment_my_profile);
-        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -32,7 +30,12 @@ public class MyProfileFragment extends Fragment {
         btnManageAccount.setOnClickListener(v -> handleBtnManageAccount());
     }
 
-    private void handleBtnReturn() { parentActivity.getOnBackPressedDispatcher().onBackPressed(); }
+    private void handleBtnReturn() { requireActivity().getOnBackPressedDispatcher().onBackPressed(); }
 
-    private void handleBtnManageAccount() { parentActivity.switchFragment(new ManageAccountFragment(parentActivity)); }
+    private void handleBtnManageAccount() {
+        ActivityUtils.switchFragment(
+                (AppCompatActivity) requireActivity(),
+                new PrefsFragment()
+        );
+    }
 }

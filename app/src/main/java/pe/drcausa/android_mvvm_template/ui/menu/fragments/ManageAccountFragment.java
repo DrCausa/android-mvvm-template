@@ -1,6 +1,5 @@
 package pe.drcausa.android_mvvm_template.ui.menu.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -12,16 +11,11 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
-import pe.drcausa.android_mvvm_template.ui.login.LoginActivity;
-import pe.drcausa.android_mvvm_template.ui.menu.MenuActivity;
 
 public class ManageAccountFragment extends Fragment {
 
-    private final MenuActivity parentActivity;
-
-    public ManageAccountFragment(MenuActivity parentActivity) {
+    public ManageAccountFragment() {
         super(R.layout.fragment_manage_account);
-        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -41,7 +35,7 @@ public class ManageAccountFragment extends Fragment {
         btnDeleteAccount.setOnClickListener(v -> handleBtnDeleteAccount());
     }
 
-    private void handleBtnReturn() { parentActivity.getOnBackPressedDispatcher().onBackPressed(); }
+    private void handleBtnReturn() { requireActivity().getOnBackPressedDispatcher().onBackPressed(); }
 
     private void handleBtnUpdateProfile() {
         Toast.makeText(requireContext(), "Update Profile", Toast.LENGTH_SHORT).show();
@@ -52,9 +46,7 @@ public class ManageAccountFragment extends Fragment {
     }
 
     private void handleBtnLogout() {
-        Intent intent = new Intent(requireContext(), LoginActivity.class);
-        startActivity(intent);
-        parentActivity.finish();
+        requireActivity().finish();
     }
 
     private void handleBtnDeleteAccount() {

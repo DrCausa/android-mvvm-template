@@ -11,15 +11,11 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
-import pe.drcausa.android_mvvm_template.ui.menu.MenuActivity;
 
 public class NewPostFragment extends Fragment {
 
-    private final MenuActivity parentActivity;
-
-    public NewPostFragment(MenuActivity parentActivity) {
+    public NewPostFragment() {
         super(R.layout.fragment_new_post);
-        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -33,7 +29,7 @@ public class NewPostFragment extends Fragment {
         btnCreatePost.setOnClickListener(v -> handleBtnCreatePost());
     }
 
-    private void handleBtnReturn() { parentActivity.getOnBackPressedDispatcher().onBackPressed(); }
+    private void handleBtnReturn() { requireActivity().getOnBackPressedDispatcher().onBackPressed(); }
 
     private void handleBtnCreatePost() {
         Toast.makeText(requireContext(), "Create Post", Toast.LENGTH_SHORT).show();

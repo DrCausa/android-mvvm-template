@@ -22,6 +22,7 @@ import pe.drcausa.android_mvvm_template.ui.menu.fragments.MyProfileFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.NewPostFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.PrefsFragment;
 import pe.drcausa.android_mvvm_template.ui.menu.fragments.SearchFragment;
+import pe.drcausa.android_mvvm_template.utils.ActivityUtils;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class MenuActivity extends AppCompatActivity {
         btnNewPost.setOnClickListener(v -> handleBtnNewPost());
         btnMyProfile.setOnClickListener(v -> handleBtnMyProfile());
 
-        switchFragment(new HomeFragment(this));
+        ActivityUtils.switchFragment(this, new HomeFragment());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -75,27 +76,19 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void handleBtnHome() {
-        switchFragment(new HomeFragment(this));
+        ActivityUtils.switchFragment(this, new HomeFragment());
     }
 
     private void handleBtnSearch() {
-        switchFragment(new SearchFragment(this));
+        ActivityUtils.switchFragment(this, new SearchFragment());
     }
 
     private void handleBtnNewPost() {
-        switchFragment(new NewPostFragment(this));
+        ActivityUtils.switchFragment(this, new NewPostFragment());
     }
 
     private void handleBtnMyProfile() {
-        switchFragment(new MyProfileFragment(this));
-    }
-
-    public void switchFragment(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
+        ActivityUtils.switchFragment(this, new MyProfileFragment());
     }
 
     private void updateBottomIcons(Fragment fragment) {

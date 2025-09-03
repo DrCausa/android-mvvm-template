@@ -5,20 +5,18 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
-import pe.drcausa.android_mvvm_template.ui.menu.MenuActivity;
+import pe.drcausa.android_mvvm_template.utils.ActivityUtils;
 
 public class HomeFragment extends Fragment {
 
-    private final MenuActivity parentActivity;
-
-    public HomeFragment(MenuActivity parentActivity) {
+    public HomeFragment() {
         super(R.layout.fragment_home);
-        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -30,5 +28,10 @@ public class HomeFragment extends Fragment {
         btnPrefs.setOnClickListener(v -> handleBtnPrefs());
     }
 
-    private void handleBtnPrefs() { parentActivity.switchFragment(new PrefsFragment(parentActivity)); }
+    private void handleBtnPrefs() {
+        ActivityUtils.switchFragment(
+                (AppCompatActivity) requireActivity(),
+                new PrefsFragment()
+        );
+    }
 }

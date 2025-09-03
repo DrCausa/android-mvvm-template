@@ -1,1 +1,43 @@
+# ==========================
+# Android Studio / IntelliJ
+# ==========================
+*.iml
+/.idea/caches
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/runConfigurations/
+
+# ==========================
+# Build outputs
+# ==========================
 /build
+/captures
+.externalNativeBuild
+.cxx
+
+# ==========================
+# OS generated files
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Java / Kotlin
+# ==========================
+*.class
+*.jar
+*.log
+
+# ==========================
+# Keystore / Credentials / Env
+# ==========================
+*.keystore
+.env
+local.properties   # contiene rutas locales SDK/NDK, no subir
+
+# ==========================
+# Gradle
+# ==========================
+/.gradle             # caché local
+!gradle/wrapper/**   # subir wrapper para que otros puedan construir el proyecto
