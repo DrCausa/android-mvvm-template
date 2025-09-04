@@ -27,15 +27,19 @@ public class PostViewModel extends AndroidViewModel {
         allPosts = postRepository.getAllPostsAsync();
     }
 
-    public void insertPost(Post post) {
+    public LiveData<Boolean> insertPost(Post post) {
+        MutableLiveData<Boolean> result = new MutableLiveData<>();
         postRepository.insertPostAsync(post).observeForever(id -> {
             if (id != null && id > 0) {
                 post.setId(Math.toIntExact(id));
                 selectedPost.postValue(post);
+                result.postValue(true);
             } else {
                 errorMessage.postValue("Error inserting post");
+                result.postValue(false);
             }
         });
+        return result;
     }
 
     public LiveData<List<Post>> getAllPosts() {
