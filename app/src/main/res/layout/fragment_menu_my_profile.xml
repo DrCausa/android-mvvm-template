@@ -74,9 +74,11 @@
             android:padding="32dp">
 
             <ImageView
+                android:id="@+id/ivProfilePicture"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:layout_gravity="top|center_horizontal"
+                android:contentDescription="@string/iv_profile_picture_description"
                 android:src="@drawable/ic_launcher_foreground" />
 
             <LinearLayout
@@ -86,17 +88,17 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="{names + lastnames}"
                     android:textSize="22sp"
                     android:textColor="@color/black"
                     android:gravity="center" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="{username}"
                     android:textSize="18sp"
                     android:textColor="@color/black"
                     android:gravity="center" />

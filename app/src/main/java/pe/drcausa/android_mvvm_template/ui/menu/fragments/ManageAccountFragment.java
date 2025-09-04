@@ -14,7 +14,9 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import pe.drcausa.android_mvvm_template.R;
+import pe.drcausa.android_mvvm_template.data.model.User;
 import pe.drcausa.android_mvvm_template.ui.auth.AuthActivity;
+import pe.drcausa.android_mvvm_template.utils.PasswordUtils;
 import pe.drcausa.android_mvvm_template.viewmodel.UserViewModel;
 
 public class ManageAccountFragment extends Fragment {
@@ -45,6 +47,15 @@ public class ManageAccountFragment extends Fragment {
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
+        userViewModel.getCurrentUser().observe(getViewLifecycleOwner(), user -> {
+            if (user != null) {
+                edtNewUsername.setText(user.getUsername());
+                edtNewEmail.setText(user.getEmail());
+                edtNewFirstName.setText(user.getFirstName());
+                edtNewLastName.setText(user.getLastName());
+            }
+        });
+
         btnReturn.setOnClickListener(v -> handleBtnReturn());
         btnUpdateProfile.setOnClickListener(v -> handleBtnUpdateProfile());
         btnUpdatePassword.setOnClickListener(v -> handleBtnUpdatePassword());
@@ -55,11 +66,70 @@ public class ManageAccountFragment extends Fragment {
     private void handleBtnReturn() { requireActivity().getOnBackPressedDispatcher().onBackPressed(); }
 
     private void handleBtnUpdateProfile() {
-        Toast.makeText(requireContext(), "Update Profile", Toast.LENGTH_SHORT).show();
+        if (userViewModel.getCurrentUser().getValue() == null) {
+            Toast.makeText(requireContext(), "No user logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String newUsername = edtNewUsername.getText().toString();
+        String newEmail = edtNewEmail.getText().toString();
+        String newFirstName = edtNewFirstName.getText().toString();
+        String newLastName = edtNewLastName.getText().toString();
+
+        if (newUsername.isEmpty() || newEmail.isEmpty() || newFirstName.isEmpty() || newLastName.isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User currentUser = userViewModel.getCurrentUser().getValue();
+        currentUser.setUsername(newUsername);
+        currentUser.setEmail(newEmail);
+        currentUser.setFirstName(newFirstName);
+        currentUser.setLastName(newLastName);
+
+        userViewModel.updateUser(currentUser);
+        Toast.makeText(requireContext(), "Profile updated", Toast.LENGTH_SHORT).show();
     }
 
     private void handleBtnUpdatePassword() {
-        Toast.makeText(requireContext(), "Update Password", Toast.LENGTH_SHORT).show();
+        if (userViewModel.getCurrentUser().getValue() == null) {
+            Toast.makeText(requireContext(), "No user logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String currentPassword = edtCurrentPassword.getText().toString();
+        String newPassword = edtNewPassword.getText().toString();
+        String confirmNewPassword = edtConfirmNewPassword.getText().toString();
+
+        if (currentPassword.isEmpty() || newPassword.isEmpty() || confirmNewPassword.isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!newPassword.equals(confirmNewPassword)) {
+            Toast.makeText(requireContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User currentUser = userViewModel.getCurrentUser().getValue();
+
+        if (currentUser == null) {
+            Toast.makeText(requireContext(), "No user logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!PasswordUtils.verifyPassword(currentPassword, currentUser.getPassword())) {
+            Toast.makeText(requireContext(), "Current password is incorrect", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        currentUser.setPassword(PasswordUtils.hashPassword(newPassword));
+        userViewModel.updateUser(currentUser);
+        Toast.makeText(requireContext(), "Password updated", Toast.LENGTH_SHORT).show();
+
+        edtCurrentPassword.setText("");
+        edtNewPassword.setText("");
+        edtConfirmNewPassword.setText("");
     }
 
     private void handleBtnLogout() {
