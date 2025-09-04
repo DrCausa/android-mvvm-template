@@ -10,13 +10,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import pe.drcausa.android_mvvm_template.R;
 import pe.drcausa.android_mvvm_template.data.model.Post;
+import pe.drcausa.android_mvvm_template.data.model.User;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
+    public interface OnPostActionListener {
+        void onEdit(Post post);
+        void onDelete(Post post);
+    }
+
     private List<Post> posts = new ArrayList<>();
+    private Map<Long, User> userMap;
+    private final OnPostActionListener listener;
+
+    public PostAdapter(OnPostActionListener listener, Map<Long, User> userMap) {
+        this.listener = listener;
+        this.userMap = userMap;
+    }
 
     @NonNull
     @Override
@@ -29,9 +43,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = posts.get(position);
+        User user = userMap.get(post.getUserId());
+
         holder.txtTitle.setText(post.getTitle());
         holder.txtContent.setText(post.getContent());
-        holder.txtUser.setText("{USER}");
+        holder.txtUser.setText(user != null ? user.getUsername() : "Unknown Author");
     }
 
     @Override
@@ -41,6 +57,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+        notifyDataSetChanged();
+    }
+
+    public void setUserMap(Map<Long, User> userMap) {
+        this.userMap = userMap;
         notifyDataSetChanged();
     }
 
