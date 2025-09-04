@@ -36,11 +36,15 @@ public class UserDao {
 
     public User getById(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String selection = UserTable._ID + "=?";
+        String[] selectionArgs = {String.valueOf(id)};
+
         Cursor cursor = db.query(
                 UserTable.TABLE_NAME,
                 null,
-                UserTable._ID + "=?",
-                new String[]{String.valueOf(id)},
+                selection,
+                selectionArgs,
                 null,
                 null,
                 null
@@ -54,13 +58,17 @@ public class UserDao {
         return null;
     }
 
-    public User getByCredentials(String username, String password) {
+    public User getByUsername(String username) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String selection = UserTable.COLUMN_USERNAME + "=?";
+        String[] selectionArgs = {username};
+
         Cursor cursor = db.query(
                 UserTable.TABLE_NAME,
                 null,
-                UserTable.COLUMN_USERNAME + "=? AND " + UserTable.COLUMN_PASSWORD + "=?",
-                new String[]{username, password},
+                selection,
+                selectionArgs,
                 null,
                 null,
                 null

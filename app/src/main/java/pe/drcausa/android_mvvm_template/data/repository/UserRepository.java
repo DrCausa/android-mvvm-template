@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 
 import pe.drcausa.android_mvvm_template.data.db.dao.UserDao;
 import pe.drcausa.android_mvvm_template.data.model.User;
+import pe.drcausa.android_mvvm_template.utils.PasswordUtils;
 
 public class UserRepository {
     private final UserDao userDao;
@@ -33,12 +34,6 @@ public class UserRepository {
         return result;
     }
 
-    public LiveData<User> getUserByCredentialsAsync(String username, String password) {
-        MutableLiveData<User> result = new MutableLiveData<>();
-        executor.execute(() -> result.postValue(userDao.getByCredentials(username, password)));
-        return result;
-    }
-
     public LiveData<List<User>> getAllUsersAsync() {
         MutableLiveData<List<User>> result = new MutableLiveData<>();
         executor.execute(() -> result.postValue(userDao.getAll()));
@@ -54,6 +49,19 @@ public class UserRepository {
     public LiveData<Boolean> deleteUserAsync(int userId) {
         MutableLiveData<Boolean> result = new MutableLiveData<>();
         executor.execute(() -> result.postValue(userDao.delete(userId) > 0));
+        return result;
+    }
+
+    public LiveData<User> loginUserAsync(String username, String plainPassword) {
+        MutableLiveData<User> result = new MutableLiveData<>();
+        executor.execute(() -> {
+            User user = userDao.getByUsername(username);
+            if (user != null && PasswordUtils.verifyPassword(plainPassword, user.getPassword())) {
+                result.postValue(user);
+            } else {
+                result.postValue(null);
+            }
+        });
         return result;
     }
 }
