@@ -15,7 +15,7 @@ import pe.drcausa.android_mvvm_template.R;
 public class NewPostFragment extends Fragment {
 
     public NewPostFragment() {
-        super(R.layout.fragment_new_post);
+        super(R.layout.fragment_menu_new_post);
     }
 
     @Override

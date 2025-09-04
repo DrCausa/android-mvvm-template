@@ -15,7 +15,7 @@ import pe.drcausa.android_mvvm_template.R;
 public class PrefsFragment extends Fragment {
 
     public PrefsFragment() {
-        super(R.layout.fragment_prefs);
+        super(R.layout.fragment_menu_prefs);
     }
 
     @Override

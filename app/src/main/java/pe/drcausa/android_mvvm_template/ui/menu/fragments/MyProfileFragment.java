@@ -16,7 +16,7 @@ import pe.drcausa.android_mvvm_template.utils.ActivityUtils;
 public class MyProfileFragment extends Fragment {
 
     public MyProfileFragment() {
-        super(R.layout.fragment_my_profile);
+        super(R.layout.fragment_menu_my_profile);
     }
 
     @Override

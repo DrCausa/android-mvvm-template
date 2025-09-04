@@ -23,7 +23,7 @@ public class ManageAccountFragment extends Fragment {
     private UserViewModel userViewModel;
 
     public ManageAccountFragment() {
-        super(R.layout.fragment_manage_account);
+        super(R.layout.fragment_menu_manage_account);
     }
 
     @Override
