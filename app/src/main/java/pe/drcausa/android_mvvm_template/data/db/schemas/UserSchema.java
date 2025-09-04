@@ -3,7 +3,7 @@ package pe.drcausa.android_mvvm_template.data.db.schemas;
 import pe.drcausa.android_mvvm_template.data.db.tables.UserTable;
 
 public class UserSchema {
-    public static final String SQL_CREATE = "CREATE TABLE" + UserTable.TABLE_NAME + "(" +
+    public static final String SQL_CREATE = "CREATE TABLE " + UserTable.TABLE_NAME + "(" +
             UserTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             UserTable.COLUMN_USERNAME + " TEXT NOT NULL," +
             UserTable.COLUMN_PASSWORD + " TEXT NOT NULL," +
