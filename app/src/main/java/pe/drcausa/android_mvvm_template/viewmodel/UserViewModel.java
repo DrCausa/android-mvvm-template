@@ -45,6 +45,7 @@ public class UserViewModel extends AndroidViewModel {
                 .observeForever(user -> {
                     if (user != null) {
                         currentUser.postValue(user);
+                        sessionManager.startSession(user.getId());
                     } else {
                         loginError.postValue("Invalid credentials");
                     }
@@ -66,6 +67,7 @@ public class UserViewModel extends AndroidViewModel {
                     if (id != null && id > 0) {
                         newUser.setId(Math.toIntExact(id));
                         currentUser.postValue(newUser);
+                        sessionManager.startSession(newUser.getId());
                     } else {
                         registerError.postValue("Error registering user");
                     }
@@ -84,9 +86,15 @@ public class UserViewModel extends AndroidViewModel {
     public void deleteUser(int userId) {
         userRepository.deleteUserAsync(userId)
                 .observeForever(success -> {
-                    if (success) { currentUser.postValue(null); }
+                    if (success) {
+                        currentUser.postValue(null);
+                        sessionManager.endSession();
+                    }
                 });
     }
 
-    public void logout() { currentUser.postValue(null); }
+    public void logout() {
+        currentUser.postValue(null);
+        sessionManager.endSession();
+    }
 }
