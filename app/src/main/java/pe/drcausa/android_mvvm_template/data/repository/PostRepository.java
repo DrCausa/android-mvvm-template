@@ -39,8 +39,8 @@ public class PostRepository {
         MutableLiveData<Long> result = new MutableLiveData<>();
         executor.execute(() -> {
             long id = postDao.insert(post);
-            loadAllPosts();
             result.postValue(id);
+            loadAllPosts();
         });
         return result;
     }
