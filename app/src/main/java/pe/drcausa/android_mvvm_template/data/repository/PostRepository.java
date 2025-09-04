@@ -15,15 +15,28 @@ import pe.drcausa.android_mvvm_template.data.model.Post;
 public class PostRepository {
     private final PostDao postDao;
     private final Executor executor;
+    private final MutableLiveData<List<Post>> allPosts = new MutableLiveData<>();
 
     public PostRepository(Context context) {
         this.postDao = new PostDao(context);
         this.executor = Executors.newSingleThreadExecutor();
+        refreshPosts();
+    }
+
+    private void refreshPosts() {
+        executor.execute(() -> {
+            List<Post> posts = postDao.getAll();
+            allPosts.postValue(posts);
+        });
     }
 
     public LiveData<Long> insertPostAsync(Post post) {
         MutableLiveData<Long> result = new MutableLiveData<>();
-        executor.execute(() -> result.postValue(postDao.insert(post)));
+        executor.execute(() -> {
+            long id = postDao.insert(post);
+            refreshPosts();
+            result.postValue(id);
+        });
         return result;
     }
 
@@ -34,9 +47,7 @@ public class PostRepository {
     }
 
     public LiveData<List<Post>> getAllPostsAsync() {
-        MutableLiveData<List<Post>> result = new MutableLiveData<>();
-        executor.execute(() -> result.postValue(postDao.getAll()));
-        return result;
+        return allPosts;
     }
 
     public LiveData<List<Post>> getAllPostsByUserIdAsync(long userId) {
@@ -47,13 +58,21 @@ public class PostRepository {
 
     public LiveData<Boolean> updatePostAsync(Post post) {
         MutableLiveData<Boolean> result = new MutableLiveData<>();
-        executor.execute(() -> result.postValue(postDao.update(post) > 0));
+        executor.execute(() -> {
+            boolean success = postDao.update(post) > 0;
+            result.postValue(success);
+            if (success) { refreshPosts(); }
+        });
         return result;
     }
 
     public LiveData<Boolean> deletePostAsync(int postId) {
         MutableLiveData<Boolean> result = new MutableLiveData<>();
-        executor.execute(() -> result.postValue(postDao.delete(postId) > 0));
+        executor.execute(() -> {
+            boolean success = postDao.delete(postId) > 0;
+            result.postValue(success);
+            if (success) { refreshPosts(); }
+        });
         return result;
     }
 }
