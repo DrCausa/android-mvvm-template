@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import pe.drcausa.android_mvvm_template.R;
 import pe.drcausa.android_mvvm_template.data.model.Post;
+import pe.drcausa.android_mvvm_template.data.model.User;
 import pe.drcausa.android_mvvm_template.utils.SessionManager;
 import pe.drcausa.android_mvvm_template.viewmodel.PostViewModel;
 import pe.drcausa.android_mvvm_template.viewmodel.UserViewModel;
@@ -24,6 +25,8 @@ public class NewPostFragment extends Fragment {
     private TextInputEditText edtPostTitle, edtPostContent;
     private PostViewModel postViewModel;
     private UserViewModel userViewModel;
+
+    private User loggedUser;
 
     public NewPostFragment() {
         super(R.layout.fragment_menu_new_post);
@@ -38,8 +41,10 @@ public class NewPostFragment extends Fragment {
         edtPostTitle = view.findViewById(R.id.edtPostTitle);
         edtPostContent = view.findViewById(R.id.edtPostContent);
 
-        postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        postViewModel = new ViewModelProvider(requireActivity()).get(PostViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+
+        userViewModel.getCurrentUser().observe(getViewLifecycleOwner(), user -> loggedUser = user);
 
         btnReturn.setOnClickListener(v -> handleBtnReturn());
         btnCreatePost.setOnClickListener(v -> handleBtnCreatePost());
@@ -48,21 +53,20 @@ public class NewPostFragment extends Fragment {
     private void handleBtnReturn() { requireActivity().getOnBackPressedDispatcher().onBackPressed(); }
 
     private void handleBtnCreatePost() {
-        String title = edtPostTitle.getText().toString();
-        String content = edtPostContent.getText().toString();
+        String title = edtPostTitle.getText() != null ? edtPostTitle.getText().toString().trim() : "";
+        String content = edtPostContent.getText() != null ? edtPostContent.getText().toString().trim() : "";
 
         if (title.isEmpty() || content.isEmpty()) {
             Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (userViewModel.getCurrentUser().getValue() == null) {
+        if (loggedUser == null) {
             Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        long userId = userViewModel.getCurrentUser().getValue().getId();
-        Post post = new Post(title, content, userId);
+        Post post = new Post(title, content, loggedUser.getId());
 
         postViewModel.insertPost(post).observe(getViewLifecycleOwner(), success -> {
             if (success) {

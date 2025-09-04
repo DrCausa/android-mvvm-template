@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
 
         recyclerPosts.setAdapter(postAdapter);
 
-        postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
+        postViewModel = new ViewModelProvider(requireActivity()).get(PostViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         userViewModel.getAllUsers().observe(getViewLifecycleOwner(), users -> {
