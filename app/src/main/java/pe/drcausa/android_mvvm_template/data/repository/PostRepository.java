@@ -15,26 +15,31 @@ import pe.drcausa.android_mvvm_template.data.model.Post;
 public class PostRepository {
     private final PostDao postDao;
     private final Executor executor;
-    private final MutableLiveData<List<Post>> allPosts = new MutableLiveData<>();
+    private final MutableLiveData<List<Post>> allPosts;
 
     public PostRepository(Context context) {
         this.postDao = new PostDao(context);
         this.executor = Executors.newSingleThreadExecutor();
-        refreshPosts();
+        this.allPosts = new MutableLiveData<>();
+        loadAllPosts();
     }
 
-    private void refreshPosts() {
+    private void loadAllPosts() {
         executor.execute(() -> {
             List<Post> posts = postDao.getAll();
             allPosts.postValue(posts);
         });
     }
 
+    public LiveData<List<Post>> getAllPosts() {
+        return allPosts;
+    }
+
     public LiveData<Long> insertPostAsync(Post post) {
         MutableLiveData<Long> result = new MutableLiveData<>();
         executor.execute(() -> {
             long id = postDao.insert(post);
-            refreshPosts();
+            loadAllPosts();
             result.postValue(id);
         });
         return result;
@@ -44,10 +49,6 @@ public class PostRepository {
         MutableLiveData<Post> result = new MutableLiveData<>();
         executor.execute(() -> result.postValue(postDao.getById(id)));
         return result;
-    }
-
-    public LiveData<List<Post>> getAllPostsAsync() {
-        return allPosts;
     }
 
     public LiveData<List<Post>> getAllPostsByUserIdAsync(long userId) {
@@ -61,7 +62,7 @@ public class PostRepository {
         executor.execute(() -> {
             boolean success = postDao.update(post) > 0;
             result.postValue(success);
-            if (success) { refreshPosts(); }
+            if (success) { loadAllPosts(); }
         });
         return result;
     }
@@ -71,7 +72,7 @@ public class PostRepository {
         executor.execute(() -> {
             boolean success = postDao.delete(postId) > 0;
             result.postValue(success);
-            if (success) { refreshPosts(); }
+            if (success) { loadAllPosts(); }
         });
         return result;
     }
