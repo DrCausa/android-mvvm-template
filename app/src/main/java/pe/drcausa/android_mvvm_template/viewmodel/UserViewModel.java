@@ -11,6 +11,7 @@ import java.util.List;
 
 import pe.drcausa.android_mvvm_template.data.model.User;
 import pe.drcausa.android_mvvm_template.data.repository.UserRepository;
+import pe.drcausa.android_mvvm_template.utils.PasswordUtils;
 import pe.drcausa.android_mvvm_template.utils.SessionManager;
 
 public class UserViewModel extends AndroidViewModel {
@@ -59,7 +60,8 @@ public class UserViewModel extends AndroidViewModel {
             return;
         }
 
-        User newUser = new User(username, password, email, "", "");
+        String hashedPassword = PasswordUtils.hashPassword(password);
+        User newUser = new User(username, hashedPassword, email, username, "");
         userRepository.insertUserAsync(newUser)
                 .observeForever(id -> {
                     if (id != null && id > 0) {
