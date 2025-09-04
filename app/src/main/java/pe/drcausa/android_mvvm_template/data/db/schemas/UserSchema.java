@@ -12,5 +12,5 @@ public class UserSchema {
             UserTable.COLUMN_LAST_NAME + " TEXT NOT NULL" +
             ")";
 
-    public static final String SQL_DROP = "DROP TABLE IF EXISTS" + UserTable.TABLE_NAME;
+    public static final String SQL_DROP = "DROP TABLE IF EXISTS " + UserTable.TABLE_NAME;
 }
