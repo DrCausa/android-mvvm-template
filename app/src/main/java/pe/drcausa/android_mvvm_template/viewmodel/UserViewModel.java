@@ -50,6 +50,7 @@ public class UserViewModel extends AndroidViewModel {
         userRepository.insertUserAsync(newUser)
                 .observeForever(id -> {
                     if (id != null && id > 0) {
+                        newUser.setId(Math.toIntExact(id));
                         currentUser.postValue(newUser);
                     } else {
                         registerError.postValue("Error registering user");
