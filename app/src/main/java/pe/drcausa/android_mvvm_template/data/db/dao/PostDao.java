@@ -67,7 +67,7 @@ public class PostDao {
                 null,
                 null,
                 null,
-                null
+                PostTable._ID + " DESC"
         );
 
         if (cursor.moveToFirst()) {
@@ -127,7 +127,7 @@ public class PostDao {
                 selectionArgs,
                 null,
                 null,
-                null
+                PostTable._ID + " DESC"
         );
 
         if (cursor.moveToFirst()) {
