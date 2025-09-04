@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import pe.drcausa.android_mvvm_template.data.db.schemas.PostSchema;
 import pe.drcausa.android_mvvm_template.data.db.schemas.UserSchema;
 import pe.drcausa.android_mvvm_template.utils.AppConstants;
 
@@ -21,12 +22,14 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(UserSchema.SQL_CREATE);
+        db.execSQL(PostSchema.SQL_CREATE);
         DbSeeder.seed(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(UserSchema.SQL_DROP);
+        db.execSQL(PostSchema.SQL_DROP);
         onCreate(db);
     }
 }
