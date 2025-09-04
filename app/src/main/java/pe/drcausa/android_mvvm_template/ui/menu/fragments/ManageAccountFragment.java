@@ -71,8 +71,10 @@ public class ManageAccountFragment extends Fragment {
 
     private void handleBtnDeleteAccount() {
         if (userViewModel.getCurrentUser().getValue() != null) {
-            userViewModel.deleteUser(userViewModel.getCurrentUser().getValue().getId());
+            int userId = userViewModel.getCurrentUser().getValue().getId();
+            userViewModel.deleteUser(userId);
             Toast.makeText(requireContext(), "Account deleted", Toast.LENGTH_SHORT).show();
+
             Intent intent = new Intent(requireContext(), AuthActivity.class);
             startActivity(intent);
             requireActivity().finish();
