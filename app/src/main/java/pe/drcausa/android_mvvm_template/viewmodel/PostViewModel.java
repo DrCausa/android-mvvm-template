@@ -24,60 +24,35 @@ public class PostViewModel extends AndroidViewModel {
     public PostViewModel(@NonNull Application application) {
         super(application);
         postRepository = new PostRepository(application);
-        allPosts = postRepository.getAllPostsAsync();
-    }
-
-    public LiveData<Boolean> insertPost(Post post) {
-        MutableLiveData<Boolean> result = new MutableLiveData<>();
-        postRepository.insertPostAsync(post).observeForever(id -> {
-            if (id != null && id > 0) {
-                post.setId(Math.toIntExact(id));
-                selectedPost.postValue(post);
-                result.postValue(true);
-            } else {
-                errorMessage.postValue("Error inserting post");
-                result.postValue(false);
-            }
-        });
-        return result;
+        allPosts = postRepository.getAllPosts();
     }
 
     public LiveData<List<Post>> getAllPosts() {
         return allPosts;
     }
 
-    public void getPostById(int id) {
-        postRepository.getPostByIdAsync(id).observeForever(post -> {
-            if (post != null) {
-                selectedPost.postValue(post);
-            } else {
-                errorMessage.postValue("Post not found");
-            }
-        });
+    public LiveData<Long> insertPost(Post post) {
+        return postRepository.insertPostAsync(post);
+    }
+
+    public LiveData<Post> getPostById(int id) {
+        return postRepository.getPostByIdAsync(id);
     }
 
     public LiveData<List<Post>> getPostsByUserId(long userId) {
         return postRepository.getAllPostsByUserIdAsync(userId);
     }
 
-    public void updatePost(Post post) {
-        postRepository.updatePostAsync(post).observeForever(success -> {
-            if (Boolean.TRUE.equals(success)) {
-                selectedPost.postValue(post);
-            } else {
-                errorMessage.postValue("Error updating post");
-            }
-        });
+    public LiveData<Boolean> updatePost(Post post) {
+        return postRepository.updatePostAsync(post);
     }
 
-    public void deletePost(int postId) {
-        postRepository.deletePostAsync(postId).observeForever(success -> {
-            if (Boolean.TRUE.equals(success)) {
-                selectedPost.postValue(null);
-            } else {
-                errorMessage.postValue("Error deleting post");
-            }
-        });
+    public LiveData<Boolean> deletePost(int postId) {
+        return postRepository.deletePostAsync(postId);
+    }
+
+    public void setSelectedPost(Post post) {
+        selectedPost.setValue(post);
     }
 
     public LiveData<Post> getSelectedPost() {
