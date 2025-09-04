@@ -11,9 +11,11 @@ import java.util.List;
 
 import pe.drcausa.android_mvvm_template.data.model.User;
 import pe.drcausa.android_mvvm_template.data.repository.UserRepository;
+import pe.drcausa.android_mvvm_template.utils.SessionManager;
 
 public class UserViewModel extends AndroidViewModel {
     private final UserRepository userRepository;
+    private final SessionManager sessionManager;
 
     private final MutableLiveData<User> currentUser = new MutableLiveData<>();
     private final MutableLiveData<String> loginError = new MutableLiveData<>();
@@ -23,7 +25,19 @@ public class UserViewModel extends AndroidViewModel {
     public UserViewModel(@NonNull Application application) {
         super(application);
         userRepository = new UserRepository(application);
+        sessionManager = new SessionManager(application);
+
         allUsers = userRepository.getAllUsersAsync();
+
+        int savedUserId = sessionManager.getUserId();
+        if (savedUserId != -1) {
+            userRepository.getUserByIdAsync(savedUserId)
+                    .observeForever(user -> {
+                        if (user != null) {
+                            currentUser.postValue(user);
+                        }
+                    });
+        }
     }
 
     public void login(String username, String password) {
