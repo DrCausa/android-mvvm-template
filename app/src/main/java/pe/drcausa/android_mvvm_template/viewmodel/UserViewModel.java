@@ -33,15 +33,13 @@ public class UserViewModel extends AndroidViewModel {
         if (savedUserId != -1) {
             userRepository.getUserByIdAsync(savedUserId)
                     .observeForever(user -> {
-                        if (user != null) {
-                            currentUser.postValue(user);
-                        }
+                        if (user != null) { currentUser.postValue(user); }
                     });
         }
     }
 
     public void login(String username, String password) {
-        userRepository.getUserByCredentialsAsync(username, password)
+        userRepository.loginUserAsync(username, password)
                 .observeForever(user -> {
                     if (user != null) {
                         currentUser.postValue(user);
@@ -75,7 +73,6 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public LiveData<String> getRegisterError() { return registerError; }
-
     public LiveData<List<User>> getAllUsers() { return allUsers; }
 
     public void updateUser(User user) {
