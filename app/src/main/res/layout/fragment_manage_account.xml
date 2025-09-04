@@ -75,9 +75,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/edt_username">
+                android:hint="@string/edt_new_username">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtUsername"
+                    android:id="@+id/edtNewUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -86,9 +86,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/edt_email">
+                android:hint="@string/edt_new_email">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtEmail"
+                    android:id="@+id/edtNewEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -97,9 +97,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/edt_names">
+                android:hint="@string/edt_new_firstname">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtNames"
+                    android:id="@+id/edtNewFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -108,9 +108,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/edt_lastnames">
+                android:hint="@string/edt_new_lastname">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtLastnames"
+                    android:id="@+id/edtNewLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
