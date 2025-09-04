@@ -68,8 +68,8 @@ public class NewPostFragment extends Fragment {
 
         Post post = new Post(title, content, loggedUser.getId());
 
-        postViewModel.insertPost(post).observe(getViewLifecycleOwner(), success -> {
-            if (success) {
+        postViewModel.insertPost(post).observe(getViewLifecycleOwner(), id -> {
+            if (id != null && id > 0) {
                 Toast.makeText(requireContext(), "Post created!", Toast.LENGTH_SHORT).show();
                 edtPostTitle.setText("");
                 edtPostContent.setText("");

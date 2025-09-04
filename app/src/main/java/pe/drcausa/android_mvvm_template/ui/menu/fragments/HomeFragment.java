@@ -50,19 +50,25 @@ public class HomeFragment extends Fragment {
         postAdapter = new PostAdapter(new PostAdapter.OnPostActionListener() {
             @Override
             public void onEdit(Post post) {
-                Toast.makeText(requireContext(), "Edit post", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Edit post: " + post.getTitle(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDelete(Post post) {
-                Toast.makeText(requireContext(), "Delete post", Toast.LENGTH_SHORT).show();
+                postViewModel.deletePost(post.getId()).observe(getViewLifecycleOwner(), success -> {
+                    if (Boolean.TRUE.equals(success)) {
+                        Toast.makeText(requireContext(), "Post deleted", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(requireContext(), "Error deleting post", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }, userMap);
 
         recyclerPosts.setAdapter(postAdapter);
 
         postViewModel = new ViewModelProvider(requireActivity()).get(PostViewModel.class);
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         userViewModel.getAllUsers().observe(getViewLifecycleOwner(), users -> {
             if (users != null) {
