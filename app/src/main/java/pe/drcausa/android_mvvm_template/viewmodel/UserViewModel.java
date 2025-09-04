@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
@@ -18,41 +19,42 @@ public class UserViewModel extends AndroidViewModel {
     private final UserRepository userRepository;
     private final SessionManager sessionManager;
 
-    private final MutableLiveData<User> currentUser = new MutableLiveData<>();
+    private final MediatorLiveData<User> currentUser = new MediatorLiveData<>();
     private final MutableLiveData<String> loginError = new MutableLiveData<>();
     private final MutableLiveData<String> registerError = new MutableLiveData<>();
-    private LiveData<List<User>> allUsers;
+    private final LiveData<List<User>> allUsers;
 
     public UserViewModel(@NonNull Application application) {
         super(application);
         userRepository = new UserRepository(application);
         sessionManager = new SessionManager(application);
 
-        allUsers = userRepository.getAllUsersAsync();
+        allUsers = userRepository.getAllUsers();
 
         int savedUserId = sessionManager.getUserId();
         if (savedUserId != -1) {
-            userRepository.getUserByIdAsync(savedUserId)
-                    .observeForever(user -> {
-                        if (user != null) { currentUser.postValue(user); }
-                    });
+            LiveData<User> userSource = userRepository.getUserByIdAsync(savedUserId);
+            currentUser.addSource(userSource, user -> {
+                if (user != null) {
+                    currentUser.setValue(user);
+                }
+                currentUser.removeSource(userSource);
+            });
         }
     }
 
     public void login(String username, String password) {
-        userRepository.loginUserAsync(username, password)
-                .observeForever(user -> {
-                    if (user != null) {
-                        currentUser.postValue(user);
-                        sessionManager.startSession(user.getId());
-                    } else {
-                        loginError.postValue("Invalid credentials");
-                    }
-                });
+        LiveData<User> userSource = userRepository.loginUserAsync(username, password);
+        currentUser.addSource(userSource, user -> {
+            if (user != null) {
+                currentUser.setValue(user);
+                sessionManager.startSession(user.getId());
+            } else {
+                loginError.setValue("Invalid credentials");
+            }
+            currentUser.removeSource(userSource);
+        });
     }
-
-    public LiveData<User> getCurrentUser() { return currentUser; }
-    public LiveData<String> getLoginError() { return loginError; }
 
     public void register(String username, String email, String password, String confirmPassword) {
         if (!password.equals(confirmPassword)) {
@@ -62,38 +64,48 @@ public class UserViewModel extends AndroidViewModel {
 
         String hashedPassword = PasswordUtils.hashPassword(password);
         User newUser = new User(username, hashedPassword, email, username, "");
-        userRepository.insertUserAsync(newUser)
-                .observeForever(id -> {
-                    if (id != null && id > 0) {
-                        newUser.setId(Math.toIntExact(id));
-                        currentUser.postValue(newUser);
-                        sessionManager.startSession(newUser.getId());
-                    } else {
-                        registerError.postValue("Error registering user");
-                    }
-                });
+
+        LiveData<Long> insertSource = userRepository.insertUserAsync(newUser);
+        currentUser.addSource(insertSource, id -> {
+            if (id != null && id > 0) {
+                newUser.setId(Math.toIntExact(id));
+                currentUser.setValue(newUser);
+                sessionManager.startSession(Math.toIntExact(id));
+            } else {
+                registerError.setValue("Error registering user");
+            }
+            currentUser.removeSource(insertSource);
+        });
     }
 
-    public LiveData<String> getRegisterError() { return registerError; }
-    public LiveData<List<User>> getAllUsers() { return allUsers; }
-
     public void updateUser(User user) {
-        userRepository.updateUserAsync(user);
-        currentUser.postValue(user);
+        LiveData<Boolean> updateSource = userRepository.updateUserAsync(user);
+        currentUser.addSource(updateSource, success -> {
+            if (Boolean.TRUE.equals(success)) {
+                currentUser.setValue(user);
+            }
+            currentUser.removeSource(updateSource);
+        });
     }
 
     public void deleteUser(int userId) {
-        userRepository.deleteUserAsync(userId)
-                .observeForever(success -> {
-                    if (success) {
-                        currentUser.postValue(null);
-                        sessionManager.endSession();
-                    }
-                });
+        LiveData<Boolean> deleteSource = userRepository.deleteUserAsync(userId);
+        currentUser.addSource(deleteSource, success -> {
+            if (Boolean.TRUE.equals(success)) {
+                currentUser.setValue(null);
+                sessionManager.endSession();
+            }
+            currentUser.removeSource(deleteSource);
+        });
     }
 
     public void logout() {
         currentUser.postValue(null);
         sessionManager.endSession();
     }
+
+    public LiveData<User> getCurrentUser() { return currentUser; }
+    public LiveData<String> getLoginError() { return loginError; }
+    public LiveData<String> getRegisterError() { return registerError; }
+    public LiveData<List<User>> getAllUsers() { return allUsers; }
 }
