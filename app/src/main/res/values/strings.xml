@@ -37,4 +37,6 @@
     <string name="edt_new_firstname">New first name</string>
     <string name="edt_new_lastname">New last name</string>
     <string name="iv_profile_picture_description">Profile picture of the user</string>
+    <string name="edt_post_title">Title</string>
+    <string name="edt_post_content">Content</string>
 </resources>
