@@ -46,4 +46,5 @@
     <string name="edt_post_new_content">New content</string>
     <string name="btn_save_post">Save post</string>
     <string name="txt_test">Test</string>
+    <string name="edt_search">Search</string>
 </resources>

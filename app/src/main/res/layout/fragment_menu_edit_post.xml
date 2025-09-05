@@ -64,12 +64,16 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/edt_post_new_content">
+                android:hint="@string/edt_post_new_content"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtPostNewContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="3"
+                    android:minLines="3"
                     android:gravity="top" />
             </com.google.android.material.textfield.TextInputLayout>
 

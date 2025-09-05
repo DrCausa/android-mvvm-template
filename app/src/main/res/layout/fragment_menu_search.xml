@@ -57,9 +57,10 @@
             android:padding="32dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Search">
+                android:hint="@string/edt_search">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtSearch"
                     android:layout_width="match_parent"
@@ -71,9 +72,11 @@
                 android:id="@+id/rvResults"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="20dp"
                 android:clipToPadding="false"
-                android:paddingTop="8dp" />
+                android:background="@color/white"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_post" />
             
         </LinearLayout>
     </ScrollView>
