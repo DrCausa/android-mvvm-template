@@ -20,7 +20,7 @@ import pe.drcausa.android_mvvm_template.viewmodel.UserViewModel;
 
 public class EditPostFragment extends Fragment {
     private MaterialButton btnReturn, btnSavePost;
-    private TextInputEditText edtPostNewTitle, edtPostNewContent;
+    private TextInputEditText edtPostNewContent;
     private PostViewModel postViewModel;
     private UserViewModel userViewModel;
 
@@ -37,7 +37,6 @@ public class EditPostFragment extends Fragment {
 
         btnReturn = view.findViewById(R.id.btnReturn);
         btnSavePost = view.findViewById(R.id.btnSavePost);
-        edtPostNewTitle = view.findViewById(R.id.edtPostNewTitle);
         edtPostNewContent = view.findViewById(R.id.edtPostNewContent);
 
         postViewModel = new ViewModelProvider(requireActivity()).get(PostViewModel.class);
@@ -46,7 +45,6 @@ public class EditPostFragment extends Fragment {
         postViewModel.getSelectedPost().observe(getViewLifecycleOwner(), post -> {
             if (post != null) {
                 selectedPost = post;
-                edtPostNewTitle.setText(post.getTitle());
                 edtPostNewContent.setText(post.getContent());
             }
         });
@@ -65,10 +63,9 @@ public class EditPostFragment extends Fragment {
             return;
         }
 
-        String newTitle = edtPostNewTitle.getText() != null ? edtPostNewTitle.getText().toString().trim() : "";
         String newContent = edtPostNewContent.getText() != null ? edtPostNewContent.getText().toString().trim() : "";
 
-        if (newTitle.isEmpty() || newContent.isEmpty()) {
+        if (newContent.isEmpty()) {
             Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -78,7 +75,6 @@ public class EditPostFragment extends Fragment {
             return;
         }
 
-        selectedPost.setTitle(newTitle);
         selectedPost.setContent(newContent);
 
         postViewModel.updatePost(selectedPost).observe(getViewLifecycleOwner(), success -> {

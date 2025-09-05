@@ -118,12 +118,12 @@ public class ManageAccountFragment extends Fragment {
             return;
         }
 
-        if (!PasswordUtils.verifyPassword(currentPassword, currentUser.getPassword())) {
+        if (!PasswordUtils.verifyPassword(currentPassword, currentUser.getPasswordHash())) {
             Toast.makeText(requireContext(), "Current password is incorrect", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        currentUser.setPassword(PasswordUtils.hashPassword(newPassword));
+        currentUser.setPasswordHash(PasswordUtils.hashPassword(newPassword));
         userViewModel.updateUser(currentUser);
         Toast.makeText(requireContext(), "Password updated", Toast.LENGTH_SHORT).show();
 
