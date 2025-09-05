@@ -1,15 +1,17 @@
 package pe.drcausa.android_mvvm_template.data.model;
 
-public class Post {
+public class Comment {
     private int id;
-    private String postId;
+    private String commentId;
+    private long postId;
     private long userId;
     private String content;
     private String createdAt;
     private String updatedAt;
 
-    public Post(int id, String postId, long userId, String content, String createdAt, String updatedAt) {
+    public Comment(int id, String commentId, long postId, long userId, String content, String createdAt, String updatedAt) {
         this.id = id;
+        this.commentId = commentId;
         this.postId = postId;
         this.userId = userId;
         this.content = content;
@@ -17,7 +19,8 @@ public class Post {
         this.updatedAt = updatedAt;
     }
 
-    public Post(String postId, long userId, String content) {
+    public Comment(String commentId, long postId, long userId, String content) {
+        this.commentId = commentId;
         this.postId = postId;
         this.userId = userId;
         this.content = content;
@@ -26,18 +29,15 @@ public class Post {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public String getPostId() { return postId; }
-    public void setPostId(String postId) { this.postId = postId; }
+    public String getCommentId() { return commentId; }
+    public void setCommentId(String commentId) { this.commentId = commentId; }
+
+    public long getPostId() { return postId; }
+    public void setPostId(long postId) { this.postId = postId; }
 
     public long getUserId() { return userId; }
     public void setUserId(long userId) { this.userId = userId; }
 
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
-
-    public String getCreatedAt() { return createdAt; }
-    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
-
-    public String getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
 }

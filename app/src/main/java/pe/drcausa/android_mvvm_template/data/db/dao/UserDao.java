@@ -25,11 +25,13 @@ public class UserDao {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(UserTable.COLUMN_USER_ID, user.getUserId());
         values.put(UserTable.COLUMN_USERNAME, user.getUsername());
-        values.put(UserTable.COLUMN_PASSWORD, user.getPassword());
+        values.put(UserTable.COLUMN_PASSWORD_HASH, user.getPasswordHash());
         values.put(UserTable.COLUMN_EMAIL, user.getEmail());
         values.put(UserTable.COLUMN_FIRST_NAME, user.getFirstName());
         values.put(UserTable.COLUMN_LAST_NAME, user.getLastName());
+        values.put(UserTable.COLUMN_PROFILE_IMAGE_URL, user.getProfileImageUrl());
 
         return db.insert(UserTable.TABLE_NAME, null, values);
     }
@@ -85,6 +87,7 @@ public class UserDao {
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+
         Cursor cursor = db.query(
                 UserTable.TABLE_NAME,
                 null,
@@ -92,7 +95,7 @@ public class UserDao {
                 null,
                 null,
                 null,
-                null
+                UserTable._ID + " DESC"
         );
 
         if (cursor.moveToFirst()) {
@@ -109,10 +112,11 @@ public class UserDao {
         ContentValues values = new ContentValues();
 
         values.put(UserTable.COLUMN_USERNAME, user.getUsername());
-        values.put(UserTable.COLUMN_PASSWORD, user.getPassword());
+        values.put(UserTable.COLUMN_PASSWORD_HASH, user.getPasswordHash());
         values.put(UserTable.COLUMN_EMAIL, user.getEmail());
         values.put(UserTable.COLUMN_FIRST_NAME, user.getFirstName());
         values.put(UserTable.COLUMN_LAST_NAME, user.getLastName());
+        values.put(UserTable.COLUMN_PROFILE_IMAGE_URL, user.getProfileImageUrl());
 
         return db.update(
                 UserTable.TABLE_NAME,
@@ -134,11 +138,13 @@ public class UserDao {
     public User cursorToUser(Cursor cursor) {
         return new User(
                 cursor.getInt(cursor.getColumnIndexOrThrow(UserTable._ID)),
+                cursor.getString(cursor.getColumnIndexOrThrow(UserTable.COLUMN_USER_ID)),
                 cursor.getString(cursor.getColumnIndexOrThrow(UserTable.COLUMN_USERNAME)),
-                cursor.getString(cursor.getColumnIndexOrThrow(UserTable.COLUMN_PASSWORD)),
+                cursor.getString(cursor.getColumnIndexOrThrow(UserTable.COLUMN_PASSWORD_HASH)),
                 cursor.getString(cursor.getColumnIndexOrThrow(UserTable.COLUMN_EMAIL)),
                 cursor.getString(cursor.getColumnIndexOrThrow(UserTable.COLUMN_FIRST_NAME)),
-                cursor.getString(cursor.getColumnIndexOrThrow(UserTable.COLUMN_LAST_NAME))
+                cursor.getString(cursor.getColumnIndexOrThrow(UserTable.COLUMN_LAST_NAME)),
+                cursor.getString(cursor.getColumnIndexOrThrow(UserTable.COLUMN_PROFILE_IMAGE_URL))
         );
     }
 }

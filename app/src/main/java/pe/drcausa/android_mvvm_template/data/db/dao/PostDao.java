@@ -25,9 +25,9 @@ public class PostDao {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(PostTable.COLUMN_TITLE, post.getTitle());
-        values.put(PostTable.COLUMN_CONTENT, post.getContent());
+        values.put(PostTable.COLUMN_POST_ID, post.getPostId());
         values.put(PostTable.COLUMN_USER_ID, post.getUserId());
+        values.put(PostTable.COLUMN_CONTENT, post.getContent());
 
         return db.insert(PostTable.TABLE_NAME, null, values);
     }
@@ -79,40 +79,6 @@ public class PostDao {
         return posts;
     }
 
-    public int update(Post post) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put(PostTable.COLUMN_TITLE, post.getTitle());
-        values.put(PostTable.COLUMN_CONTENT, post.getContent());
-        values.put(PostTable.COLUMN_USER_ID, post.getUserId());
-
-        return db.update(
-                PostTable.TABLE_NAME,
-                values,
-                PostTable._ID + "=?",
-                new String[]{String.valueOf(post.getId())}
-        );
-    }
-
-    public int delete(int id) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        return db.delete(
-                PostTable.TABLE_NAME,
-                PostTable._ID + "=?",
-                new String[]{String.valueOf(id)}
-        );
-    }
-
-    private Post cursorToPost(Cursor cursor) {
-        return new Post(
-                cursor.getInt(cursor.getColumnIndexOrThrow(PostTable._ID)),
-                cursor.getString(cursor.getColumnIndexOrThrow(PostTable.COLUMN_TITLE)),
-                cursor.getString(cursor.getColumnIndexOrThrow(PostTable.COLUMN_CONTENT)),
-                cursor.getLong(cursor.getColumnIndexOrThrow(PostTable.COLUMN_USER_ID))
-        );
-    }
-
     public List<Post> getAllByUserId(long userId) {
         List<Post> posts = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -137,5 +103,41 @@ public class PostDao {
             cursor.close();
         }
         return posts;
+    }
+
+    public int update(Post post) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(PostTable.COLUMN_POST_ID, post.getPostId());
+        values.put(PostTable.COLUMN_USER_ID, post.getUserId());
+        values.put(PostTable.COLUMN_CONTENT, post.getContent());
+
+        return db.update(
+                PostTable.TABLE_NAME,
+                values,
+                PostTable._ID + "=?",
+                new String[]{String.valueOf(post.getId())}
+        );
+    }
+
+    public int delete(int id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        return db.delete(
+                PostTable.TABLE_NAME,
+                PostTable._ID + "=?",
+                new String[]{String.valueOf(id)}
+        );
+    }
+
+    private Post cursorToPost(Cursor cursor) {
+        return new Post(
+                cursor.getInt(cursor.getColumnIndexOrThrow(PostTable._ID)),
+                cursor.getString(cursor.getColumnIndexOrThrow(PostTable.COLUMN_POST_ID)),
+                cursor.getLong(cursor.getColumnIndexOrThrow(PostTable.COLUMN_USER_ID)),
+                cursor.getString(cursor.getColumnIndexOrThrow(PostTable.COLUMN_CONTENT)),
+                cursor.getString(cursor.getColumnIndexOrThrow(PostTable.COLUMN_CREATED_AT)),
+                cursor.getString(cursor.getColumnIndexOrThrow(PostTable.COLUMN_UPDATED_AT))
+        );
     }
 }
