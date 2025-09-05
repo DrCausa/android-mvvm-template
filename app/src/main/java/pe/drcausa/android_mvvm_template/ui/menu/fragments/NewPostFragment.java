@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.UUID;
+
 import pe.drcausa.android_mvvm_template.R;
 import pe.drcausa.android_mvvm_template.data.model.Post;
 import pe.drcausa.android_mvvm_template.data.model.User;
@@ -22,7 +24,7 @@ import pe.drcausa.android_mvvm_template.viewmodel.UserViewModel;
 public class NewPostFragment extends Fragment {
 
     private MaterialButton btnReturn, btnCreatePost;
-    private TextInputEditText edtPostTitle, edtPostContent;
+    private TextInputEditText edtPostContent;
     private PostViewModel postViewModel;
     private UserViewModel userViewModel;
 
@@ -38,7 +40,6 @@ public class NewPostFragment extends Fragment {
 
         btnReturn = view.findViewById(R.id.btnReturn);
         btnCreatePost = view.findViewById(R.id.btnCreatePost);
-        edtPostTitle = view.findViewById(R.id.edtPostTitle);
         edtPostContent = view.findViewById(R.id.edtPostContent);
 
         postViewModel = new ViewModelProvider(requireActivity()).get(PostViewModel.class);
@@ -53,10 +54,9 @@ public class NewPostFragment extends Fragment {
     private void handleBtnReturn() { requireActivity().getOnBackPressedDispatcher().onBackPressed(); }
 
     private void handleBtnCreatePost() {
-        String title = edtPostTitle.getText() != null ? edtPostTitle.getText().toString().trim() : "";
         String content = edtPostContent.getText() != null ? edtPostContent.getText().toString().trim() : "";
 
-        if (title.isEmpty() || content.isEmpty()) {
+        if (content.isEmpty()) {
             Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -66,12 +66,15 @@ public class NewPostFragment extends Fragment {
             return;
         }
 
-        Post post = new Post(title, content, loggedUser.getId());
+        Post post = new Post(
+                UUID.randomUUID().toString(),
+                loggedUser.getId(),
+                content
+        );
 
         postViewModel.insertPost(post).observe(getViewLifecycleOwner(), id -> {
             if (id != null && id > 0) {
                 Toast.makeText(requireContext(), "Post created!", Toast.LENGTH_SHORT).show();
-                edtPostTitle.setText("");
                 edtPostContent.setText("");
                 requireActivity().getOnBackPressedDispatcher().onBackPressed();
             } else {
