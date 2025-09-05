@@ -9,6 +9,7 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
+import java.util.UUID;
 
 import pe.drcausa.android_mvvm_template.data.model.User;
 import pe.drcausa.android_mvvm_template.data.repository.UserRepository;
@@ -63,7 +64,15 @@ public class UserViewModel extends AndroidViewModel {
         }
 
         String hashedPassword = PasswordUtils.hashPassword(password);
-        User newUser = new User(username, hashedPassword, email, username, "");
+        User newUser = new User(
+                UUID.randomUUID().toString(),
+                username,
+                hashedPassword,
+                email,
+                null,
+                null,
+                null
+        );
 
         LiveData<Long> insertSource = userRepository.insertUserAsync(newUser);
         currentUser.addSource(insertSource, id -> {
