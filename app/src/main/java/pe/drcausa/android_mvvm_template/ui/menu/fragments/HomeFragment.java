@@ -50,7 +50,11 @@ public class HomeFragment extends Fragment {
         postAdapter = new PostAdapter(new PostAdapter.OnPostActionListener() {
             @Override
             public void onEdit(Post post) {
-                Toast.makeText(requireContext(), "Edit post: " + post.getTitle(), Toast.LENGTH_SHORT).show();
+                postViewModel.setSelectedPost(post);
+                ActivityUtils.switchFragment(
+                        (AppCompatActivity) requireActivity(),
+                        new EditPostFragment()
+                );
             }
 
             @Override

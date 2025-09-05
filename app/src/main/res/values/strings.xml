@@ -39,4 +39,10 @@
     <string name="iv_profile_picture_description">Profile picture of the user</string>
     <string name="edt_post_title">Title</string>
     <string name="edt_post_content">Content</string>
+    <string name="btn_delete_post">Delete</string>
+    <string name="btn_edit_post">Edit</string>
+    <string name="txt_edit_post_title">Edit Post</string>
+    <string name="edt_post_new_title">New title</string>
+    <string name="edt_post_new_content">New content</string>
+    <string name="btn_save_post">Save post</string>
 </resources>
