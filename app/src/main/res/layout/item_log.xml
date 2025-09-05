@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingVertical="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtLogDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="{ date }"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:alpha="0.5" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtLogType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="{ type }"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txtLogMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="{ output }"
+        android:textColor="@android:color/black" />
+
+</LinearLayout>
