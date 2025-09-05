@@ -26,6 +26,10 @@
             android:name=".ui.menu.MenuActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".ui.admin.AdminActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>
