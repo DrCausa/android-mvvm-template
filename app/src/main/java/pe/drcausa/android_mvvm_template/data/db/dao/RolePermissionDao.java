@@ -1,6 +1,7 @@
 package pe.drcausa.android_mvvm_template.data.db.dao;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,8 +15,8 @@ import pe.drcausa.android_mvvm_template.data.model.RolePermission;
 public class RolePermissionDao {
     private final DbHelper dbHelper;
 
-    public RolePermissionDao(DbHelper dbHelper) {
-        this.dbHelper = dbHelper;
+    public RolePermissionDao(Context context) {
+        dbHelper = new DbHelper(context);
     }
 
     public long insert(RolePermission rolePermission) {
@@ -61,6 +62,58 @@ public class RolePermissionDao {
                 null,
                 null,
                 null,
+                null,
+                null,
+                RolePermissionTable._ID + " DESC"
+        );
+
+        if (cursor.moveToFirst()) {
+            do {
+                rolePermissions.add(cursorToRolePermission(cursor));
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return rolePermissions;
+    }
+
+    public List<RolePermission> getAllByRoleId(long roleId) {
+        List<RolePermission> rolePermissions = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String selection = RolePermissionTable.COLUMN_ROLE_ID + "=?";
+        String[] selectionArgs = {String.valueOf(roleId)};
+
+        Cursor cursor = db.query(
+                RolePermissionTable.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                RolePermissionTable._ID + " DESC"
+        );
+
+        if (cursor.moveToFirst()) {
+            do {
+                rolePermissions.add(cursorToRolePermission(cursor));
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return rolePermissions;
+    }
+
+    public List<RolePermission> getAllByPermissionId(long permissionId) {
+        List<RolePermission> rolePermissions = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String selection = RolePermissionTable.COLUMN_PERMISSION_ID + "=?";
+        String[] selectionArgs = {String.valueOf(permissionId)};
+
+        Cursor cursor = db.query(
+                RolePermissionTable.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
                 null,
                 null,
                 RolePermissionTable._ID + " DESC"

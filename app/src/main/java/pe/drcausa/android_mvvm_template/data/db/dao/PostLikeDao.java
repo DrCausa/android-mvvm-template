@@ -1,6 +1,7 @@
 package pe.drcausa.android_mvvm_template.data.db.dao;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,8 +15,8 @@ import pe.drcausa.android_mvvm_template.data.model.PostLike;
 public class PostLikeDao {
     private final DbHelper dbHelper;
 
-    public PostLikeDao(DbHelper dbHelper) {
-        this.dbHelper = dbHelper;
+    public PostLikeDao(Context context) {
+        dbHelper = new DbHelper(context);
     }
 
     public long insert(PostLike postLike) {

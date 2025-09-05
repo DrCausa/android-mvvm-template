@@ -76,7 +76,7 @@ public class UserRepository {
         MutableLiveData<User> result = new MutableLiveData<>();
         executor.execute(() -> {
             User user = userDao.getByUsername(username);
-            if (user != null && PasswordUtils.verifyPassword(plainPassword, user.getPassword())) {
+            if (user != null && PasswordUtils.verifyPassword(plainPassword, user.getPasswordHash())) {
                 result.postValue(user);
             } else {
                 result.postValue(null);

@@ -76,6 +76,32 @@ public class UserRoleDao {
         return userRoles;
     }
 
+    public List<UserRole> getAllByUserId(long userId) {
+        List<UserRole> userRoles = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String selection = UserRoleTable.COLUMN_USER_ID + "=?";
+        String[] selectionArgs = {String.valueOf(userId)};
+
+        Cursor cursor = db.query(
+                UserRoleTable.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                UserRoleTable._ID + " DESC"
+        );
+
+        if (cursor.moveToFirst()) {
+            do {
+                userRoles.add(cursorToUserRole(cursor));
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return userRoles;
+    }
+
     public int update(UserRole userRole) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
