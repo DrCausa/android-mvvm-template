@@ -1,5 +1,6 @@
 package pe.drcausa.android_mvvm_template.ui.adapters;
 
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -14,8 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import pe.drcausa.android_mvvm_template.R;
@@ -38,6 +43,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         this.userMap = userMap;
     }
 
+    private String getTimeAgo(String dateTime) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        try {
+            Date date = simpleDateFormat.parse(dateTime);
+            if (date != null) {
+                long timeInMillis = date.getTime();
+                return DateUtils.getRelativeTimeSpanString(
+                        timeInMillis,
+                        System.currentTimeMillis(),
+                        DateUtils.SECOND_IN_MILLIS
+                ).toString();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateTime;
+    }
+
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,6 +75,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         User user = userMap.get(post.getUserId());
 
         holder.txtPostUser.setText(user != null ? user.getUsername() : "Unknown Author");
+        holder.txtPostContent.setText(post.getContent());
+        holder.txtPostDate.setText(getTimeAgo(post.getCreatedAt()));
         holder.txtPostAbout.setText(R.string.txt_test);
 
         holder.btnMore.setOnClickListener(v -> {
