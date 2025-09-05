@@ -75,7 +75,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/edt_new_username">
+                android:hint="@string/edt_new_username"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtNewUsername"
                     android:layout_width="match_parent"
@@ -86,7 +90,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/edt_new_email">
+                android:hint="@string/edt_new_email"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtNewEmail"
                     android:layout_width="match_parent"
@@ -97,7 +105,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/edt_new_firstname">
+                android:hint="@string/edt_new_firstname"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtNewFirstName"
                     android:layout_width="match_parent"
@@ -108,7 +120,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/edt_new_lastname">
+                android:hint="@string/edt_new_lastname"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtNewLastName"
                     android:layout_width="match_parent"
@@ -150,7 +166,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="@string/edt_current_password"
-                app:endIconMode="password_toggle">
+                app:endIconMode="password_toggle"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtCurrentPassword"
                     android:layout_width="match_parent"
@@ -163,7 +183,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="@string/edt_new_password"
-                app:endIconMode="password_toggle">
+                app:endIconMode="password_toggle"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtNewPassword"
                     android:layout_width="match_parent"
@@ -176,7 +200,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="@string/edt_confirm_new_password"
-                app:endIconMode="password_toggle">
+                app:endIconMode="password_toggle"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtConfirmNewPassword"
                     android:layout_width="match_parent"
