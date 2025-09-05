@@ -101,6 +101,12 @@ public class MyProfileFragment extends Fragment {
             }
         });
 
+        postViewModel.getAllPosts().observe(getViewLifecycleOwner(), posts -> {
+            if (posts != null) {
+                postAdapter.setPosts(posts);
+            }
+        });
+
         btnReturn.setOnClickListener(v -> handleBtnReturn());
         btnManageAccount.setOnClickListener(v -> handleBtnManageAccount());
     }
