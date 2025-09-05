@@ -4,8 +4,9 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,9 +51,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         Post post = posts.get(position);
         User user = userMap.get(post.getUserId());
 
-        holder.txtTitle.setText(post.getTitle());
-        holder.txtContent.setText(post.getContent());
-        holder.txtUser.setText(user != null ? user.getUsername() : "Unknown Author");
+        holder.txtPostUser.setText(user != null ? user.getUsername() : "Unknown Author");
+        holder.txtPostAbout.setText(R.string.txt_test);
 
         holder.btnMore.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(v.getContext(), holder.btnMore);
@@ -90,15 +90,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     static class PostViewHolder extends RecyclerView.ViewHolder {
-        MaterialTextView txtTitle, txtContent, txtUser;
+        ImageView ivProfilePicture;
+        MaterialTextView txtPostUser, txtPostAbout, txtPostContent, txtPostDate;
         MaterialButton btnMore;
+        LinearLayout layoutPostUserRanks;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtTitle = itemView.findViewById(R.id.txtPostTitle);
-            txtContent = itemView.findViewById(R.id.txtPostContent);
-            txtUser = itemView.findViewById(R.id.txtPostUser);
+            ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
+            txtPostUser = itemView.findViewById(R.id.txtPostUser);
+            txtPostAbout = itemView.findViewById(R.id.txtPostAbout);
+            txtPostContent = itemView.findViewById(R.id.txtPostContent);
+            txtPostDate = itemView.findViewById(R.id.txtPostDate);
             btnMore = itemView.findViewById(R.id.btnMore);
+            layoutPostUserRanks = itemView.findViewById(R.id.layoutPostUserRanks);
         }
     }
 }
