@@ -103,7 +103,7 @@
                         <ImageView
                             android:layout_width="15dp"
                             android:layout_height="15dp"
-                            android:src="@drawable/build"
+                            android:src="@drawable/build_fill"
                             app:tint="#000000" />
 
                     </LinearLayout>
