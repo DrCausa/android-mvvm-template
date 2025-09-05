@@ -22,6 +22,7 @@ import pe.drcausa.android_mvvm_template.R;
 import pe.drcausa.android_mvvm_template.data.model.Post;
 import pe.drcausa.android_mvvm_template.data.model.User;
 import pe.drcausa.android_mvvm_template.ui.adapters.PostAdapter;
+import pe.drcausa.android_mvvm_template.ui.admin.AdminActivity;
 import pe.drcausa.android_mvvm_template.utils.ActivityUtils;
 import pe.drcausa.android_mvvm_template.viewmodel.PostViewModel;
 import pe.drcausa.android_mvvm_template.viewmodel.UserViewModel;
