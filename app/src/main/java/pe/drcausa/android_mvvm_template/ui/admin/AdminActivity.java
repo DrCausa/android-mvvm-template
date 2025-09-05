@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 
 import pe.drcausa.android_mvvm_template.R;
-import pe.drcausa.android_mvvm_template.ui.menu.fragments.HomeFragment;
+import pe.drcausa.android_mvvm_template.ui.admin.fragments.HomeFragment;
 import pe.drcausa.android_mvvm_template.utils.ActivityUtils;
 
 public class AdminActivity extends AppCompatActivity {
