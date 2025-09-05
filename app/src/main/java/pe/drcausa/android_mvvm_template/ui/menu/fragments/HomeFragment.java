@@ -1,5 +1,6 @@
 package pe.drcausa.android_mvvm_template.ui.menu.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ import pe.drcausa.android_mvvm_template.viewmodel.UserViewModel;
 
 public class HomeFragment extends Fragment {
 
-    private MaterialButton btnPrefs;
+    private MaterialButton btnAdmin, btnPrefs;
     private RecyclerView recyclerPosts;
     private PostAdapter postAdapter;
     private PostViewModel postViewModel;
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        btnAdmin = view.findViewById(R.id.btnAdmin);
         btnPrefs = view.findViewById(R.id.btnPrefs);
         recyclerPosts = view.findViewById(R.id.recyclerPosts);
 
@@ -90,7 +92,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        btnAdmin.setOnClickListener(v -> handleBtnAdmin());
         btnPrefs.setOnClickListener(v -> handleBtnPrefs());
+    }
+
+    private void handleBtnAdmin() {
+        Intent intent = new Intent(requireActivity(), AdminActivity.class);
+        startActivity(intent);
+        requireActivity().finish();
     }
 
     private void handleBtnPrefs() {
