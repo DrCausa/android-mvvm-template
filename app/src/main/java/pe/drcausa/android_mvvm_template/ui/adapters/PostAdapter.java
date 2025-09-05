@@ -1,12 +1,17 @@
 package pe.drcausa.android_mvvm_template.ui.adapters;
 
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +53,25 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.txtTitle.setText(post.getTitle());
         holder.txtContent.setText(post.getContent());
         holder.txtUser.setText(user != null ? user.getUsername() : "Unknown Author");
+
+        holder.btnMore.setOnClickListener(v -> {
+            PopupMenu popup = new PopupMenu(v.getContext(), holder.btnMore);
+            MenuInflater inflater = popup.getMenuInflater();
+            inflater.inflate(R.menu.menu_post_item, popup.getMenu());
+
+            popup.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == R.id.btnEditPost) {
+                    listener.onEdit(post);
+                    return true;
+                } else if (item.getItemId() == R.id.btnDeletePost) {
+                    listener.onDelete(post);
+                    return true;
+                }
+                return false;
+            });
+
+            popup.show();
+        });
     }
 
     @Override
@@ -66,13 +90,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     static class PostViewHolder extends RecyclerView.ViewHolder {
-        TextView txtTitle, txtContent, txtUser;
+        MaterialTextView txtTitle, txtContent, txtUser;
+        MaterialButton btnMore;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txtPostTitle);
             txtContent = itemView.findViewById(R.id.txtPostContent);
             txtUser = itemView.findViewById(R.id.txtPostUser);
+            btnMore = itemView.findViewById(R.id.btnMore);
         }
     }
 }
