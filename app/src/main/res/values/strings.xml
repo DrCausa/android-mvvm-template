@@ -47,4 +47,5 @@
     <string name="btn_save_post">Save post</string>
     <string name="txt_test">Test</string>
     <string name="edt_search">Search</string>
+    <string name="txt_admin_panel_title">Admin Panel</string>
 </resources>
