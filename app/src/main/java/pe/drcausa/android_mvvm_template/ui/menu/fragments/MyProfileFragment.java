@@ -2,6 +2,7 @@ package pe.drcausa.android_mvvm_template.ui.menu.fragments;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import pe.drcausa.android_mvvm_template.R;
+import pe.drcausa.android_mvvm_template.data.model.Post;
 import pe.drcausa.android_mvvm_template.data.model.User;
 import pe.drcausa.android_mvvm_template.ui.adapters.PostAdapter;
 import pe.drcausa.android_mvvm_template.utils.ActivityUtils;
@@ -51,7 +53,28 @@ public class MyProfileFragment extends Fragment {
 
         recyclerUserPosts.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        postAdapter = new PostAdapter(null, userMap);
+        postAdapter = new PostAdapter(new PostAdapter.OnPostActionListener() {
+            @Override
+            public void onEdit(Post post) {
+                postViewModel.setSelectedPost(post);
+                ActivityUtils.switchFragment(
+                        (AppCompatActivity) requireActivity(),
+                        new EditPostFragment()
+                );
+            }
+
+            @Override
+            public void onDelete(Post post) {
+                postViewModel.deletePost(post.getId()).observe(getViewLifecycleOwner(), success -> {
+                    if (Boolean.TRUE.equals(success)) {
+                        Toast.makeText(requireContext(), "Post deleted", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(requireContext(), "Error deleting post", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }, userMap);
+
         recyclerUserPosts.setAdapter(postAdapter);
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
